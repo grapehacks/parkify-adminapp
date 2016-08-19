@@ -29,7 +29,7 @@ namespace AdministrationPanel.Model
 		public int unreadMsgCounter { get; set; }
 		public int __v { get; set; }
 		public bool rememberLastChoice { get; set; }
-		public bool participate { get; set; }
-		public int type { get; set; } 
+		public UserParticipate participate { get; set; }
+		public UserType type { get; set; } 
     }   
 }
