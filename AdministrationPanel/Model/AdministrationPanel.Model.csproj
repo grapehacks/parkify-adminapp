@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataProvider.cs" />
     <Compile Include="DataTypes\AuthResponse.cs" />
     <Compile Include="DataTypes\Card.cs" />
     <Compile Include="DataTypes\Credentials.cs" />
@@ -52,6 +53,8 @@
     <Compile Include="DataTypes\Ping.cs" />
     <Compile Include="DataTypes\UserParticipate.cs" />
     <Compile Include="DataTypes\UserType.cs" />
+    <Compile Include="IDataProvider.cs" />
+    <Compile Include="IParkifyModel.cs" />
     <Compile Include="ParkifyModel.cs" />
     <Compile Include="DataTypes\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
