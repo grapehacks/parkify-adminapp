@@ -76,10 +76,17 @@ namespace AdministrationPanel.Views
                     MessageBox.Show(String.Join(", ", draws));
                 }
             }, 1);
-            
-			model.GetUsers(ping =>
+
+			model.GetUsers((users, error) =>
             {
-                MessageBox.Show(ping);
+				if (error != null)
+				{
+					MessageBox.Show(error);
+				}
+				else
+				{
+					MessageBox.Show(String.Join(", ", users));
+				}
             });
             
             User a = new User();

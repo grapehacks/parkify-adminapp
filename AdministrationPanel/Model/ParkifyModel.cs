@@ -33,16 +33,14 @@ namespace AdministrationPanel.Model
             });
         }
 
-		public void GetUsers(Action<string> action)
+		public void GetUsers(Action<IEnumerable<User>, string> action)
 		{
 			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS, RestSharp.Method.GET);
 			request.RequestFormat = RestSharp.DataFormat.Json;
 			m_RestClient.ExecuteAsync<List<User>>(request, (response, callback) =>
 			{
 				LOG(response.Content);
-				action(response.Content);
-
-				UserList = response.Data;
+				action(response.Data, response.ErrorMessage);
 			});
 		}
 

@@ -15,8 +15,9 @@ namespace AdministrationPanel.Model
 
     public enum UserParticipate
     {
-        Yes,
-        No
+        No,
+		Yes,
+		NotDefined
     }
 
     public class User
