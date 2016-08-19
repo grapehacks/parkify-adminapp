@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Model.InternalModel
+namespace Model.DataTypes
 {
     public class Ping
     {

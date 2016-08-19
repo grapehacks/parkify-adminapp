@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AdministrationPanel.Views"
              xmlns:viewModels="clr-namespace:AdministrationPanel.ViewModels;assembly=AdministrationPanel.ViewModels"
-             xmlns:internalModel="clr-namespace:Model.InternalModel;assembly=Model"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DataContext="{d:DesignInstance d:Type=viewModels:HomeTabViewModel, IsDesignTimeCreatable=True}"

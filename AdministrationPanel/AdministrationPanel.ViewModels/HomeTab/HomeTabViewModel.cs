@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using GalaSoft.MvvmLight.CommandWpf;
-using Model.InternalModel;
+using Model.DataTypes;
 
 namespace AdministrationPanel.ViewModels.HomeTab
 {

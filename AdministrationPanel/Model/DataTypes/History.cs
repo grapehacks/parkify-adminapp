@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Model.InternalModel
+namespace Model.DataTypes
 {
     public class History
     {
