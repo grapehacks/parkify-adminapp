@@ -9,10 +9,14 @@ namespace AdministrationPanel.Model
 {
     public class Card
     {
-        public string name;
-        public string type;
-        public bool removed;
-        public bool active;
-        public User user;
+        public string name { get; set; }
+
+        public string type { get; set; }
+
+        public bool removed { get; set; }
+
+        public bool active { get; set; }
+
+        public User user { get; set; }
     }
 }

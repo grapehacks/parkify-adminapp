@@ -9,7 +9,8 @@ namespace AdministrationPanel.Model
 {
     public class Draw
     {
-        User winner;
-        Card card;
+        User winner { get; set; }
+
+        Card card { get; set; }
     }
 }

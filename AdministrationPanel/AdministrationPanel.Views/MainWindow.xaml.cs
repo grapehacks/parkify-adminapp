@@ -28,6 +28,7 @@ namespace AdministrationPanel.Views
             DataContext = new MainViewModel();
 
             ParkifyModel model = new ParkifyModel("http://krk.grapeup.com:8080");
+
 			model.GetUsers(ping =>
             {
                 MessageBox.Show(ping);

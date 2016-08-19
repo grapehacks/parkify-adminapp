@@ -20,12 +20,12 @@ namespace AdministrationPanel.Model
             m_RestClient = new RestSharp.RestClient(m_ServerAddress);
         }
 
-        public void SendPing(Action<string> action)
+        public void SendPing(Action<Ping> action)
         {
             RestSharp.RestRequest request = new RestSharp.RestRequest(PING_PATH);
             m_RestClient.ExecuteAsync<Ping>(request, (response, callback) => {
                 LOG(response.Content);
-                action(response.Content);
+                action(response.Data);
             });
         }
 
