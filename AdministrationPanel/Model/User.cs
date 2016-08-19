@@ -20,13 +20,13 @@ namespace Model
 
     public class User
     {
-        public string Email;
-        public string Password;
-        public string Name;
-        public UserType Type;
-        public Card CardValue; //? 
-        public bool RememberLastChoice;
-        public bool Removed;
-        public int UnreadMsgCounter;
+        public string email;
+        public string password;
+        public string name;
+        public UserType type;
+        public Card card; //? 
+        public bool rememberLastChoice;
+        public bool removed;
+        public int unreadMsgCounter;
     }   
 }

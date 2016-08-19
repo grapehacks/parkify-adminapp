@@ -8,7 +8,7 @@ namespace Model
 {
     public class Draw
     {
-        User Winner;
-        Card CardValue;
+        User winner;
+        Card card;
     }
 }

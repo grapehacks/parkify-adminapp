@@ -8,9 +8,9 @@ namespace Model
 {
     public class History
     {
-        public DateTime Date;
-        public Array<Draw> Winners;
-        public IEnumerable<User> Users;
-        public IEnumerable<String> SpecialCases;
+        public DateTime date;
+        public Array<Draw> winners;
+        public IEnumerable<User> users;
+        public IEnumerable<String> specialCases;
     }
 }

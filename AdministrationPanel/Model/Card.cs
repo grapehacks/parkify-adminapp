@@ -8,10 +8,10 @@ namespace Model
 {
     public class Card
     {
-        public string Name;
-        public string Type;
-        public bool Removed;
-        public bool Active;
-        public User UserValue; // ?
+        public string name;
+        public string type;
+        public bool removed;
+        public bool active;
+        public User user;
     }
 }
