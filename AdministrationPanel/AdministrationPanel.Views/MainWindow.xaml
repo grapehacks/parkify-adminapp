@@ -8,6 +8,6 @@
         d:DataContext="{d:DesignInstance d:Type=local:MainWindow, IsDesignTimeCreatable=True }"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBlock Text="{Binding Title}" />
+        <local:HomeTab />
     </Grid>
 </Window>

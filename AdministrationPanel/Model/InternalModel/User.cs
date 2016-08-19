@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AdministrationPanel.Model;
+﻿
 
 namespace AdministrationPanel.Model
 {
@@ -16,18 +11,20 @@ namespace AdministrationPanel.Model
     public enum UserParticipate
     {
         Yes,
-        No
+        No, 
+        Unknown
     }
 
-    public class User
+    public struct User
     {
         public string email;
         public string password;
-        public string name;
+        public string Name { get; set; }
         public UserType type;
         public Card card; //? 
         public bool rememberLastChoice;
         public bool removed;
         public int unreadMsgCounter;
+        public UserParticipate WillParticipate { get; set; }
     }   
 }

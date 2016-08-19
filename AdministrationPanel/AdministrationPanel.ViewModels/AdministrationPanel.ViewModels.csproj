@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministrationPanelViewModelBase.cs" />
+    <Compile Include="HomeTabViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\AdministrationPanel.Model.csproj">
+      <Project>{C7B8AC5F-0303-4DA3-BD5B-E06447AB4ED7}</Project>
+      <Name>AdministrationPanel.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
