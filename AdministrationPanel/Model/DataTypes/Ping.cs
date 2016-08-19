@@ -4,6 +4,6 @@ namespace Model.InternalModel
 {
     public class Ping
     {
-        public DateTime date;
+        public DateTime date { get; set; }
     }
 }
