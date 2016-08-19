@@ -29,7 +29,7 @@ namespace AdministrationPanel.Model
             RestSharp.RestRequest request = new RestSharp.RestRequest(PING_PATH);
             m_RestClient.ExecuteAsync<Ping>(request, (response, callback) => {
                 LOG(response.Content);
-                action(response.Data, response.ErrorMessage);
+                action(response.Data, GetErrorString(response));
             });
         }
 
@@ -40,9 +40,18 @@ namespace AdministrationPanel.Model
 			m_RestClient.ExecuteAsync<List<User>>(request, (response, callback) =>
 			{
 				LOG(response.Content);
-				action(response.Data, response.ErrorMessage);
+                action(response.Data, GetErrorString(response));
 			});
 		}
+        public void GetUser(string userId, Action<User, string> action)
+        {
+            RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS+"/"+userId);
+            m_RestClient.ExecuteAsync<User>(request, response =>
+            {
+                LOG(response.Content);
+                action(response.Data, GetErrorString(response));
+            });
+        }
 
         public void AddUser(User user, Action<User, string> action)
         {
@@ -51,7 +60,7 @@ namespace AdministrationPanel.Model
             m_RestClient.ExecuteAsync<User>(request, response =>
             {
                 LOG(response.Content);
-                action(response.Data, response.ErrorMessage);
+                action(response.Data, GetErrorString(response));
             });
         }
 
@@ -62,7 +71,7 @@ namespace AdministrationPanel.Model
             m_RestClient.ExecuteAsync<List<Card>>(request, (response, callback) =>
             {
                 LOG(response.Content);
-                action(response.Data, response.ErrorMessage);
+                action(response.Data, GetErrorString(response));
             });
         }
 
@@ -73,7 +82,7 @@ namespace AdministrationPanel.Model
             m_RestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
             {
                 LOG(response.Content);
-                action(response.Data, response.ErrorMessage);
+                action(response.Data, GetErrorString(response));
             });
         }
 
@@ -84,7 +93,7 @@ namespace AdministrationPanel.Model
             m_RestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
             {
                 LOG(response.Content);
-                action(response.Data, response.ErrorMessage);
+                action(response.Data, GetErrorString(response));
             });
         }
 
@@ -94,6 +103,21 @@ namespace AdministrationPanel.Model
         private void LOG(string log)
         {
             Console.WriteLine(this.GetType().Name + ":: " + log);
+        }
+
+        private string GetErrorString(IRestResponse restResponse)
+        {
+            if (restResponse.ErrorMessage != null)
+            {
+                return restResponse.ErrorMessage;
+            }
+
+            if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                return restResponse.StatusDescription;
+            }
+
+            return null;
         }
 
         ///////////////////////////////////////////////////////////////////////////

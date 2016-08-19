@@ -97,8 +97,21 @@ namespace AdministrationPanel.Views
             a.removed = false;
             a.type = UserType.Admin;
             a.unreadMsgCounter = 10;
+            a._id = "dupa";
 
             model.AddUser(a, (user, error) =>
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
+                else
+                {
+                    MessageBox.Show(user.ToString());
+                }
+            });
+
+            model.GetUser("dupa", (user, error) =>
             {
                 if (error != null)
                 {
