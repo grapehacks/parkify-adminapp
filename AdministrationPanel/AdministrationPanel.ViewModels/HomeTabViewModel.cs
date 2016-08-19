@@ -10,9 +10,9 @@ namespace AdministrationPanel.ViewModels
         public HomeTabViewModel()
         {
             UsersCollection = new ObservableCollection<User>();
-            UsersCollection.Add(new User { Name = "Yes", WillParticipate = UserParticipate.Yes });
-            UsersCollection.Add(new User { Name = "No", WillParticipate = UserParticipate.No });
-            UsersCollection.Add(new User { Name = "Unknown", WillParticipate = UserParticipate.Unknown });
+            UsersCollection.Add(new User { name = "Yes", participate = UserParticipate.Yes });
+            UsersCollection.Add(new User { name = "No", participate = UserParticipate.No });
+            UsersCollection.Add(new User { name = "Unknown", participate = UserParticipate.NotDefined });
 
             AvailibleCards = "7";
             UpcomingDraw = "28-10-2016";
@@ -62,7 +62,13 @@ namespace AdministrationPanel.ViewModels
         #region ChangeDrawDate command
         private RelayCommand _changeDrawDate;
 
-        public RelayCommand ChangeDrawDateCommand => _changeDrawDate ?? (_changeDrawDate = new RelayCommand(ChangeDrawDate));
+        public RelayCommand ChangeDrawDateCommand
+        {
+            get
+            {
+                return _changeDrawDate ?? (_changeDrawDate = new RelayCommand(ChangeDrawDate));
+            }
+        }
 
         private void ChangeDrawDate()
         {
