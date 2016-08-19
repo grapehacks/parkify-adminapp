@@ -37,8 +37,8 @@ namespace AdministrationPanel.Model
 			{
 				LOG(response.Content);
 				action(response.Content);
-				List<User> test = response.Data;
-				int k = 6;
+
+				List<User> test2 = response.Data;
 			});
 		}
 

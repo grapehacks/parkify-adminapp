@@ -21,15 +21,15 @@ namespace AdministrationPanel.Model
 
     public class User
     {
-		public string _id;
-        public string email;
-		public string name;
-        public string password;
-		public bool removed;
-		public int unreadMsgCounter;
-		public int __v;
-		public bool rememberLastChoice;
-		public bool participate;
-        public int type;
+		public string _id { get; set; }
+		public string email { get; set; }
+		public string name { get; set; }
+		public string password { get; set; }
+		public bool removed { get; set; }
+		public int unreadMsgCounter { get; set; }
+		public int __v { get; set; }
+		public bool rememberLastChoice { get; set; }
+		public bool participate { get; set; }
+		public int type { get; set; } 
     }   
 }
