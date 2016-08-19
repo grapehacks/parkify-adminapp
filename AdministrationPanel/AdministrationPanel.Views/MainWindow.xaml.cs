@@ -88,20 +88,24 @@ namespace AdministrationPanel.Views
 				{
 					MessageBox.Show(String.Join(", ", users));
 					Users = users;
+					bool removeUser = false;
 
-					var UserItem = users.ElementAt(100);
-
-					model.RemoveUser((error2) =>
+					if (removeUser)
 					{
-						if (error != null)
+						var UserItem = users.ElementAt(2);
+
+						model.RemoveUser((error2) =>
 						{
-							MessageBox.Show(error2);
-						}
-						else
-						{
-							MessageBox.Show("User removed");
-						}
-					}, UserItem._id);
+							if (error != null)
+							{
+								MessageBox.Show(error2);
+							}
+							else
+							{
+								MessageBox.Show("User removed");
+							}
+						}, UserItem._id);
+					}
 				}
             });
             
