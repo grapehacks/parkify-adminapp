@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ModelCards.cs" />
+    <Compile Include="Controller\ModelDraws.cs" />
+    <Compile Include="Controller\ModelUsers.cs" />
     <Compile Include="DataTypes\AuthResponse.cs" />
     <Compile Include="DataTypes\Card.cs" />
     <Compile Include="DataTypes\Credentials.cs" />
