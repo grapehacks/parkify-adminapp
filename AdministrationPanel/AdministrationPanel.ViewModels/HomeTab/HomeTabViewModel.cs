@@ -9,22 +9,33 @@ namespace AdministrationPanel.ViewModels.HomeTab
     {
         public HomeTabViewModel()
         {
-            UsersCollection = new ObservableCollection<User>();
-            UsersCollection.Add(new User { name = "Yes", participate = UserParticipate.Yes });
-            UsersCollection.Add(new User { name = "No", participate = UserParticipate.No });
-            UsersCollection.Add(new User { name = "Unknown", participate = UserParticipate.NotDefined });
+            _usersCollection = new ObservableCollection<HomeTabUserViewModel>
+            {
+                new HomeTabUserViewModel {Name = "Yes", UserParticipate = UserParticipate.Yes},
+                new HomeTabUserViewModel {Name = "No", UserParticipate = UserParticipate.No},
+                new HomeTabUserViewModel {Name = "Unknown", UserParticipate = UserParticipate.NotDefined}
+            };
 
             AvailibleCards = "7";
             UpcomingDraw = "28-10-2016";
             TotalCards = "10";
         }
 
-        public ObservableCollection<User> UsersCollection { get; private set; }
-
+        private ObservableCollection<HomeTabUserViewModel> _usersCollection;
         private string _upcomingDraw;
         private string _availibleCards;
         private string _totalCards;
 
+        public ObservableCollection<HomeTabUserViewModel> UsersCollection
+        {
+            get { return _usersCollection; }
+            set
+            {
+                if (Equals(value, _usersCollection)) return;
+                _usersCollection = value;
+                OnPropertyChanged(() => UsersCollection);
+            }
+        }
         public string UpcomingDraw
         {
             get { return _upcomingDraw; }
@@ -72,7 +83,7 @@ namespace AdministrationPanel.ViewModels.HomeTab
 
         private void ChangeDrawDate()
         {
-            MessageBox.Show("asd");
+            MessageBox.Show("ChangeDrawDate");
         }
         #endregion
     }

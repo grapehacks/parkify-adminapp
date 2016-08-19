@@ -9,21 +9,21 @@ namespace AdministrationPanel.Views
 {
     public partial class MainWindow
     {
-		private ParkifyModel model;
+		private ParkifyModel _model;
 
         public MainWindow()
         {
             InitializeComponent();
+            /*
+            _model = new ParkifyModel("http://krk.grapeup.com:8080");
 
-            model = new ParkifyModel("http://krk.grapeup.com:8080");
+			var cred = new Credentials();
+			cred.Email = "email@test.com";
+			cred.Password = "test_pass";
 
-			Credentials cred = new Credentials();
-			cred.email = "email@test.com";
-			cred.password = "test_pass";
+			_model.OnAuthenticationSucceed += model_OnAuthenticationSucceed;
 
-			model.OnAuthenticationSucceed += model_OnAuthenticationSucceed;
-
-			model.Authenticate(cred, (error) =>
+			_model.Authenticate(cred, (error) =>
 			{
 				if (error != null)
 				{
@@ -33,12 +33,12 @@ namespace AdministrationPanel.Views
 				{
 					MessageBox.Show("Auth success");
 				}
-			});
-		}
+			});*/
+        }
 
 		void model_OnAuthenticationSucceed(object sender, EventArgs e)
 		{
-			model.SendPing((ping, error) =>
+			_model.SendPing((ping, error) =>
 			{
 				if (error != null)
 				{
@@ -46,11 +46,11 @@ namespace AdministrationPanel.Views
 				}
 				else
 				{
-					MessageBox.Show(ping.date.ToString());
+					MessageBox.Show(ping.Date.ToString());
 				}
 			});
 
-			model.GetCards((cards, error) =>
+			_model.GetCards((cards, error) =>
 			{
 				if (error != null)
 				{
@@ -62,7 +62,7 @@ namespace AdministrationPanel.Views
 				}
 			});
 
-			model.GetDraws((draws, error) =>
+			_model.GetDraws((draws, error) =>
 			{
 				if (error != null)
 				{
@@ -74,7 +74,7 @@ namespace AdministrationPanel.Views
 				}
 			});
 
-			model.GetDraws((draws, error) =>
+			_model.GetDraws((draws, error) =>
 			{
 				if (error != null)
 				{
@@ -87,7 +87,7 @@ namespace AdministrationPanel.Views
 			}, 1);
 
 			IEnumerable<User> Users;
-			model.GetUsers((users, error) =>
+			_model.GetUsers((users, error) =>
 			{
 				if (error != null)
 				{
@@ -97,13 +97,13 @@ namespace AdministrationPanel.Views
 				{
 					MessageBox.Show(String.Join(", ", users));
 					Users = users;
-					bool removeUser = false;
+					var removeUser = false;
 
 					if (removeUser)
 					{
-						var UserItem = users.ElementAt(2);
+						var userItem = users.ElementAt(2);
 
-						model.RemoveUser((error2) =>
+						_model.RemoveUser((error2) =>
 						{
 							if (error != null)
 							{
@@ -113,22 +113,22 @@ namespace AdministrationPanel.Views
 							{
 								MessageBox.Show("User removed");
 							}
-						}, UserItem._id);
+						}, userItem.Id);
 					}
 				}
 			});
 
-			User a = new User();
-			a.name = "Krol Lew";
-			a.email = "krol@lew.pl";
-			a.participate = UserParticipate.Yes;
-			a.password = "lion";
-			a.removed = false;
-			a.type = UserType.Admin;
-			a.unreadMsgCounter = 10;
-			a._id = "dupa";
+			var a = new User();
+			a.Name = "Krol Lew";
+			a.Email = "krol@lew.pl";
+			a.Participate = UserParticipate.Yes;
+			a.Password = "lion";
+			a.Removed = false;
+			a.Type = UserType.Admin;
+			a.UnreadMsgCounter = 10;
+			a.Id = "dupa";
 
-			model.AddUser(a, (user, error) =>
+			_model.AddUser(a, (user, error) =>
 			{
 				if (error != null)
 				{
@@ -140,7 +140,7 @@ namespace AdministrationPanel.Views
 				}
 			});
 
-			model.GetUser("dupa", (user, error) =>
+			_model.GetUser("dupa", (user, error) =>
 			{
 				if (error != null)
 				{

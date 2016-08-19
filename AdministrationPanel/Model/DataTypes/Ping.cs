@@ -2,6 +2,7 @@
 
 namespace Model.DataTypes
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Ping
     {
         public DateTime date { get; set; }

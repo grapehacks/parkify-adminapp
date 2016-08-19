@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HomeTab\ParticipantColorConverter.cs" />
     <Compile Include="UsersTab\UsersTab.xaml.cs">
       <DependentUpon>UsersTab.xaml</DependentUpon>
     </Compile>

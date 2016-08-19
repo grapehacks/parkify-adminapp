@@ -3,17 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AdministrationPanel.Views"
-             xmlns:viewModels="clr-namespace:AdministrationPanel.ViewModels;assembly=AdministrationPanel.ViewModels"
+             xmlns:homeTab="clr-namespace:AdministrationPanel.ViewModels.HomeTab;assembly=AdministrationPanel.ViewModels"
+             xmlns:dataTypes="clr-namespace:Model.DataTypes;assembly=Model"
+             xmlns:homeTab1="clr-namespace:AdministrationPanel.Views.HomeTab"
              mc:Ignorable="d" 
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             d:DataContext="{d:DesignInstance d:Type=viewModels:HomeTabViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance d:Type=homeTab:HomeTabViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
-    
+
     <UserControl.Resources>
-        <DataTemplate x:Key="HomuListViewItemTemplate" DataType="internalModel:User"/>
+        <homeTab1:ParticipantColorConverter x:Key="ParticipantColorConverter"/>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -25,18 +25,19 @@
         </Grid.RowDefinitions>
 
 
-        <Border Grid.Row="0" Grid.Column="0">
+        <Border Grid.Row="0" Grid.Column="0"
+                Padding="8,4,8,4" BorderThickness="1" BorderBrush="Blue">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    
+
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <TextBlock Grid.Column="0" Grid.Row="0"
                     Text="Najbliższe losowanie:"/>
                 <Button Grid.Column="0" Grid.Row="1"
@@ -48,7 +49,8 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="0" Grid.Column="1">
+        <Border Grid.Row="0" Grid.Column="1" 
+                Padding="8,4,8,4" BorderThickness="1" BorderBrush="Blue">
             <StackPanel>
                 <TextBlock Text="Dostępne karty"/>
 
@@ -58,12 +60,25 @@
                     <Run Text="{Binding TotalCards}"/>
                 </TextBlock>
             </StackPanel>
-
         </Border>
-        
+
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
-                  ItemsSource="{Binding UsersCollection}"
-                  ItemTemplate="{StaticResource HomuListViewItemTemplate}"/>
-        
+                  ItemsSource="{Binding UsersCollection}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Username">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type homeTab:HomeTabUserViewModel}">
+                                <Border Background="{Binding UserParticipate, Converter={StaticResource ParticipantColorConverter}}" >
+                                    <TextBlock Text="{Binding Name}"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
     </Grid>
 </UserControl>

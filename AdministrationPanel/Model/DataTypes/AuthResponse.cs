@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model.DataTypes
+﻿namespace Model.DataTypes
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
 	class AuthResponse
 	{
 		public string message { get; set; }

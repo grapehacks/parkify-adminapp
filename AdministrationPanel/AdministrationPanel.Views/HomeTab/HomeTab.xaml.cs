@@ -8,7 +8,6 @@ namespace AdministrationPanel.Views.HomeTab
         public HomeTab()
         {
             InitializeComponent();
-            DataContext = new HomeTabViewModel();
         }
     }
 }

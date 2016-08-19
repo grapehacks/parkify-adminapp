@@ -14,7 +14,13 @@
     <Grid>
         <TabControl>
             <TabItem Header="Home">
-                <homeTab:HomeTab />
+                <ContentPresenter Content="{Binding HomeTabViewModel}">
+                    <ContentPresenter.ContentTemplate>
+                        <DataTemplate>
+                            <homeTab:HomeTab/>
+                        </DataTemplate>
+                    </ContentPresenter.ContentTemplate>
+                </ContentPresenter>
             </TabItem>
             
             <TabItem Header="Users">

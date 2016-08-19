@@ -1,44 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model.DataTypes;
 using RestSharp;
 
 namespace Model
 {
-    public partial class ParkifyModel
-    {
-		static string PATH_PING = "ping";
-		static string PATH_GET_USERS = @"api/users";
-        static string PATH_GET_CARDS = @"api/cards";
-		static string PATH_GET_DRAW = @"api/draw";
-		static string PATH_AUTH = @"/authenticate";
+	public partial class ParkifyModel : IParkifyModel
+	{
+		private const string PathPing = "ping";
+		private const string PathGetUsers = @"api/users";
+		private const string PathGetCards = @"api/cards";
+		private const string PathGetDraw = @"api/draw";
+		private const string PathAuth = @"/authenticate";
 
 		public event EventHandler OnAuthenticationSucceed;
 		public event EventHandler OnAuthenticationFailed;
 
-		string myToken;
+		string _myToken;
 
+		///////////////////////////////////////////////////////////////////////////
 
+		public ParkifyModel(string serverAddress)
+		{
+			_mRestClient = new RestClient(serverAddress);
+		}
 
-        ///////////////////////////////////////////////////////////////////////////
-
-        public ParkifyModel(string serverAddress)
-        {
-            m_ServerAddress = serverAddress;
-            m_RestClient = new RestSharp.RestClient(m_ServerAddress);
-        }
+		///////////////////////////////////////////////////////////////////////////
 
 		public void Authenticate(Credentials cred, Action<Error> action)
 		{
-			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_AUTH, Method.POST);
-			request.RequestFormat = RestSharp.DataFormat.Json;
-			request.AddJsonBody(cred);
-			m_RestClient.ExecuteAsync<AuthResponse>(request, (response, callback) =>
+			var request = new RestRequest(PathAuth, Method.POST)
 			{
-				LOG(response.Content);
+				RequestFormat = DataFormat.Json
+			};
+
+			request.AddJsonBody(cred);
+			_mRestClient.ExecuteAsync<AuthResponse>(request, (response, callback) =>
+			{
+				Log(response.Content);
 
 				if (response.StatusCode != System.Net.HttpStatusCode.OK)
 				{
@@ -47,9 +46,9 @@ namespace Model
 				else
 				{
 					var tokenResponse = response.Data;
-					if (tokenResponse.user.type == UserType.Admin)
+					if (tokenResponse.user.Type == UserType.Admin)
 					{
-						myToken = tokenResponse.token;
+						_myToken = tokenResponse.token;
 
 						if (!string.IsNullOrEmpty(tokenResponse.token))
 						{
@@ -70,42 +69,43 @@ namespace Model
 			});
 		}
 
-        ///////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////
 
-        public void SendPing(Action<Ping, string> action)
-        {
-			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_PING);
-            m_RestClient.ExecuteAsync<Ping>(request, (response, callback) => {
-                LOG(response.Content);
-                action(response.Data, GetErrorString(response));
-            });
-        }
-        
-        ///////////////////////////////////////////////////////////////////////////
+		public void SendPing(Action<Ping, string> action)
+		{
+			var request = new RestRequest(PathPing);
+			_mRestClient.ExecuteAsync<Ping>(request, (response, callback) => {
+				Log(response.Content);
+				action(response.Data, GetErrorString(response));
+			});
+		}
 
-        private void LOG(string log)
-        {
-            Console.WriteLine(this.GetType().Name + ":: " + log);
-        }
+		///////////////////////////////////////////////////////////////////////////
 
-        private string GetErrorString(IRestResponse restResponse)
-        {
-            if (restResponse.ErrorMessage != null)
-            {
-                return restResponse.ErrorMessage;
-            }
+		private void Log(string log)
+		{
+			Console.WriteLine(GetType().Name + ":: " + log);
+		}
 
-            if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                return restResponse.StatusDescription;
-            }
+		///////////////////////////////////////////////////////////////////////////
 
-            return null;
-        }
+		private string GetErrorString(IRestResponse restResponse)
+		{
+			if (restResponse.ErrorMessage != null)
+			{
+				return restResponse.ErrorMessage;
+			}
 
-        ///////////////////////////////////////////////////////////////////////////
+			if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
+			{
+				return restResponse.StatusDescription;
+			}
 
-        private string m_ServerAddress;
-        private RestSharp.RestClient m_RestClient;
-    }
+			return null;
+		}
+
+		///////////////////////////////////////////////////////////////////////////
+
+		private readonly RestClient _mRestClient;
+	}
 }
