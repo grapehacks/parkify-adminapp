@@ -9,6 +9,7 @@ namespace Model.DataTypes
 	class AuthResponse
 	{
 		public string message { get; set; }
+		public User user { get; set; }
 		public string token { get; set; }
 	}
 }

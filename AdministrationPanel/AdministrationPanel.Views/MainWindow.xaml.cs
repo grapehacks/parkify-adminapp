@@ -27,14 +27,14 @@ namespace AdministrationPanel.Views
 			{
 				if (error != null)
 				{
-					MessageBox.Show(error);
+					MessageBox.Show(error.errorMessage);
 				}
 				else
 				{
 					MessageBox.Show("Auth success");
 				}
 			});
-        }
+		}
 
 		void model_OnAuthenticationSucceed(object sender, EventArgs e)
 		{
