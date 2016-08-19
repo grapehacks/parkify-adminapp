@@ -9,9 +9,9 @@ namespace AdministrationPanel.Model
 {
     public class History
     {
-        public DateTime date;
-        public IEnumerable<Draw> winners;
-        public IEnumerable<User> users;
-        public IEnumerable<String> specialCases;
+        public DateTime date { get; set; }
+        public List<Draw> winners { get; set; }
+        public List<User> users { get; set; }
+        public List<String> specialCases { get; set; }
     }
 }
