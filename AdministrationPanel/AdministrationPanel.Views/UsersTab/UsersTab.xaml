@@ -13,14 +13,14 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Button Name="PART_AddUserButton"
+        <Button Name="PartAddUserButton"
                 Grid.Row="0"
                 Content="Add user +"
                 Margin="20"
                 Width="100"
                 Height="30" />
 
-        <ListView Name="PART_UsersTable"
+        <ListView Name="PartUsersTable"
                   Grid.Row="1"
                   ItemsSource="{Binding UserList}">
             <ListView.View>

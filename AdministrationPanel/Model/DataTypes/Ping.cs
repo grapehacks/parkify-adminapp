@@ -4,6 +4,6 @@ namespace Model.DataTypes
 {
     public class Ping
     {
-        public DateTime date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

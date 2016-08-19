@@ -2,13 +2,13 @@
 {
     public class Draw
     {
-        User winner { get; set; }
+        User Winner { get; set; }
 
-        Card card { get; set; }
+        Card Card { get; set; }
 
         public override string ToString()
         {
-            return (winner != null ? winner.name : "[NO USER]") + " " + (card != null ? card.name : "[NO CARD]");
+            return (Winner != null ? Winner.Name : "[NO USER]") + " " + (Card != null ? Card.Name : "[NO CARD]");
         }
     }
 }

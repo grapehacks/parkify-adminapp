@@ -10,9 +10,9 @@ namespace AdministrationPanel.ViewModels.HomeTab
         public HomeTabViewModel()
         {
             UsersCollection = new ObservableCollection<User>();
-            UsersCollection.Add(new User { name = "Yes", participate = UserParticipate.Yes });
-            UsersCollection.Add(new User { name = "No", participate = UserParticipate.No });
-            UsersCollection.Add(new User { name = "Unknown", participate = UserParticipate.NotDefined });
+            UsersCollection.Add(new User { Name = "Yes", Participate = UserParticipate.Yes });
+            UsersCollection.Add(new User { Name = "No", Participate = UserParticipate.No });
+            UsersCollection.Add(new User { Name = "Unknown", Participate = UserParticipate.NotDefined });
 
             AvailibleCards = "7";
             UpcomingDraw = "28-10-2016";
