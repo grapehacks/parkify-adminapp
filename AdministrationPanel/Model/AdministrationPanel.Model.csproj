@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypes\AuthResponse.cs" />
     <Compile Include="DataTypes\Card.cs" />
+    <Compile Include="DataTypes\Credentials.cs" />
     <Compile Include="DataTypes\Draw.cs" />
     <Compile Include="DataTypes\History.cs" />
     <Compile Include="DataTypes\Ping.cs" />
