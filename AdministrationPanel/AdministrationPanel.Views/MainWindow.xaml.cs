@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AdministrationPanel.ViewModels;
+using AdministrationPanel.Model;
 
 namespace AdministrationPanel.Views
 {
@@ -25,6 +26,9 @@ namespace AdministrationPanel.Views
         {
             InitializeComponent();
             DataContext = new MainViewModel();
+
+            ParkifyModel model = new ParkifyModel("http://krk.grapeup.com:8080");
+            model.SendPing(null);
         }
     }
 }

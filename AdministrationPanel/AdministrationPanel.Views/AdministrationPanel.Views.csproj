@@ -126,6 +126,10 @@
       <Project>{cbcfdd93-ec30-477a-9fd2-598ad16991a4}</Project>
       <Name>AdministrationPanel.ViewModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model\AdministrationPanel.Model.csproj">
+      <Project>{c7b8ac5f-0303-4da3-bd5b-e06447ab4ed7}</Project>
+      <Name>AdministrationPanel.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,8 +4,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrationPanel.Views", "AdministrationPanel.Views\AdministrationPanel.Views.csproj", "{0A4F88B0-D758-493C-91B8-FE3F4D783954}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C7B8AC5F-0303-4DA3-BD5B-E06447AB4ED7} = {C7B8AC5F-0303-4DA3-BD5B-E06447AB4ED7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrationPanel.ViewModels", "AdministrationPanel.ViewModels\AdministrationPanel.ViewModels.csproj", "{CBCFDD93-EC30-477A-9FD2-598AD16991A4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C7B8AC5F-0303-4DA3-BD5B-E06447AB4ED7} = {C7B8AC5F-0303-4DA3-BD5B-E06447AB4ED7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrationPanel.Model", "Model\AdministrationPanel.Model.csproj", "{C7B8AC5F-0303-4DA3-BD5B-E06447AB4ED7}"
 EndProject

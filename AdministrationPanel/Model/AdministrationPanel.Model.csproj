@@ -43,8 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Card.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="InternalModel\Card.cs" />
+    <Compile Include="InternalModel\Draw.cs" />
+    <Compile Include="InternalModel\History.cs" />
+    <Compile Include="InternalModel\Ping.cs" />
+    <Compile Include="ParkifyModel.cs" />
+    <Compile Include="InternalModel\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
