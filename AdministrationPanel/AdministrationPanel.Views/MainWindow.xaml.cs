@@ -46,7 +46,7 @@ namespace AdministrationPanel.Views
 				}
 				else
 				{
-					MessageBox.Show(ping.Date.ToString());
+					MessageBox.Show(ping.date.ToString());
 				}
 			});
 

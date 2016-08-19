@@ -8,51 +8,51 @@ using RestSharp;
 
 namespace Model
 {
-    public partial class ParkifyModel
+	public partial class ParkifyModel : IParkifyModel
     {
        	public void GetUsers(Action<IEnumerable<User>, string> action)
 		{
-			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS, RestSharp.Method.GET);
+			RestSharp.RestRequest request = new RestSharp.RestRequest(PathGetUsers, RestSharp.Method.GET);
 			request.RequestFormat = RestSharp.DataFormat.Json;
-			request.AddHeader("x-access-token", myToken);
-			m_RestClient.ExecuteAsync<List<User>>(request, (response, callback) =>
+			request.AddHeader("x-access-token", _myToken);
+			_mRestClient.ExecuteAsync<List<User>>(request, (response, callback) =>
 			{
-				LOG(response.Content);
+				Log(response.Content);
                 action(response.Data, GetErrorString(response));
 			});
 		}
 
         public void GetUser(string userId, Action<User, string> action)
         {
-            RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS+"/"+userId);
-			request.AddHeader("x-access-token", myToken);
-            m_RestClient.ExecuteAsync<User>(request, (response, callback) =>
+			RestSharp.RestRequest request = new RestSharp.RestRequest(PathGetUsers + "/" + userId);
+			request.AddHeader("x-access-token", _myToken);
+			_mRestClient.ExecuteAsync<User>(request, (response, callback) =>
             {
-                LOG(response.Content);
+				Log(response.Content);
                 action(response.Data, GetErrorString(response));
             });
         }
 
         public void AddUser(User user, Action<User, string> action)
         {
-            RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS, Method.POST);
-			request.AddHeader("x-access-token", myToken);
+			RestSharp.RestRequest request = new RestSharp.RestRequest(PathGetUsers, Method.POST);
+			request.AddHeader("x-access-token", _myToken);
             request.AddJsonBody(user);
-            m_RestClient.ExecuteAsync<User>(request, (response, callback) =>
+			_mRestClient.ExecuteAsync<User>(request, (response, callback) =>
             {
-                LOG(response.Content);
+				Log(response.Content);
                 action(response.Data, GetErrorString(response));
             });
         }
         
         public void RemoveUser(Action<string> action, string userId)
         {
-            RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS + @"/" + userId, RestSharp.Method.DELETE);
-            request.AddHeader("x-access-token", myToken);
+			RestSharp.RestRequest request = new RestSharp.RestRequest(PathGetUsers + @"/" + userId, RestSharp.Method.DELETE);
+			request.AddHeader("x-access-token", _myToken);
             request.RequestFormat = RestSharp.DataFormat.Json;
-            m_RestClient.ExecuteAsync(request, (response, callback) =>
+			_mRestClient.ExecuteAsync(request, (response, callback) =>
             {
-                LOG(response.Content);
+                Log(response.Content);
                 action(response.ErrorMessage);
             });
         }
