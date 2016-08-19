@@ -14,7 +14,7 @@ namespace AdministrationPanel.Views
         public MainWindow()
         {
             InitializeComponent();
-
+            /*
             _model = new ParkifyModel("http://krk.grapeup.com:8080");
 
 			Credentials cred = new Credentials();
@@ -33,7 +33,7 @@ namespace AdministrationPanel.Views
 				{
 					MessageBox.Show("Auth success");
 				}
-			});
+			});*/
         }
 
 		void model_OnAuthenticationSucceed(object sender, EventArgs e)
