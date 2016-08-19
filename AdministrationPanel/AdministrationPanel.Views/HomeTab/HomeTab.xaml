@@ -63,7 +63,13 @@
         </Border>
 
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
-                  ItemsSource="{Binding UsersCollection}">
+                  ItemsSource="{Binding UsersCollection}" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Username">
