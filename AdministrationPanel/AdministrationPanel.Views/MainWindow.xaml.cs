@@ -28,7 +28,7 @@ namespace AdministrationPanel.Views
             DataContext = new MainViewModel();
 
             ParkifyModel model = new ParkifyModel("http://krk.grapeup.com:8080");
-
+            
             model.SendPing((ping, error) =>
             {
                 if (error != null)
@@ -40,7 +40,7 @@ namespace AdministrationPanel.Views
                     MessageBox.Show(ping.date.ToString());
                 }
             });
-
+            
             model.GetCards((cards, error) =>
             {
                 if (error != null)
@@ -49,7 +49,7 @@ namespace AdministrationPanel.Views
                 }
                 else
                 {
-                    MessageBox.Show(cards.ToString());
+                    MessageBox.Show(String.Join(", ", cards));
                 }
             });
 
@@ -61,7 +61,7 @@ namespace AdministrationPanel.Views
                 }
                 else
                 {
-                    MessageBox.Show(draws.ToString());
+                    MessageBox.Show(String.Join(", ", draws));
                 }
             });
 
@@ -73,13 +73,34 @@ namespace AdministrationPanel.Views
                 }
                 else
                 {
-                    MessageBox.Show(draws.ToString());
+                    MessageBox.Show(String.Join(", ", draws));
                 }
             }, 1);
-
+            
 			model.GetUsers(ping =>
             {
                 MessageBox.Show(ping);
+            });
+            
+            User a = new User();
+            a.name = "Krol Lew";
+            a.email = "krol@lew.pl";
+            a.participate = UserParticipate.Yes;
+            a.password = "lion";
+            a.removed = false;
+            a.type = UserType.Admin;
+            a.unreadMsgCounter = 10;
+
+            model.AddUser(a, (user, error) =>
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
+                else
+                {
+                    MessageBox.Show(user.ToString());
+                }
             });
         }
     }

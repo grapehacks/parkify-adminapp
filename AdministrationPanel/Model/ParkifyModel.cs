@@ -46,6 +46,17 @@ namespace AdministrationPanel.Model
 			});
 		}
 
+        public void AddUser(User user, Action<User, string> action)
+        {
+            RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS, Method.POST);
+            request.AddJsonBody(user);
+            m_RestClient.ExecuteAsync<User>(request, response =>
+            {
+                LOG(response.Content);
+                action(response.Data, response.ErrorMessage);
+            });
+        }
+
         public void GetCards(Action<List<Card>, string> action)
         {
             RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_CARDS, RestSharp.Method.GET);
