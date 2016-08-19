@@ -9,12 +9,16 @@ namespace AdministrationPanel.Model
 {
     public class ParkifyModel
     {
-        public static string PING_PATH = "ping";
-		public static string PATH_GET_USERS = @"api/users";
-        public static string PATH_GET_CARDS = @"api/cards";
-        public static string PATH_GET_DRAW = @"api/draw";
+		static string PATH_PING = "ping";
+		static string PATH_GET_USERS = @"api/users";
+        static string PATH_GET_CARDS = @"api/cards";
+		static string PATH_GET_DRAW = @"api/draw";
+		static string PATH_AUTH = @"/authenticate";
 
-		public List<User> UserList;
+		public event EventHandler OnAuthenticationSucceed;
+		public event EventHandler OnAuthenticationFailed;
+
+		string myToken;
 
         ///////////////////////////////////////////////////////////////////////////
 
@@ -24,9 +28,32 @@ namespace AdministrationPanel.Model
             m_RestClient = new RestSharp.RestClient(m_ServerAddress);
         }
 
+		public void Authenticate(Credentials cred, Action<string> action)
+		{
+			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_AUTH, Method.POST);
+			request.RequestFormat = RestSharp.DataFormat.Json;
+			request.AddJsonBody(cred);
+			m_RestClient.ExecuteAsync<AuthResponse>(request, (response, callback) =>
+			{
+				LOG(response.Content);
+				var tokenResponse = response.Data;
+				myToken = tokenResponse.token;
+				action(tokenResponse.message);
+
+				if (!string.IsNullOrEmpty(tokenResponse.token))
+				{
+					OnAuthenticationSucceed(this, EventArgs.Empty);
+				}
+				else
+				{
+					OnAuthenticationFailed(this, EventArgs.Empty);
+				}
+			});
+		}
+
         public void SendPing(Action<Ping, string> action)
         {
-            RestSharp.RestRequest request = new RestSharp.RestRequest(PING_PATH);
+			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_PING);
             m_RestClient.ExecuteAsync<Ping>(request, (response, callback) => {
                 LOG(response.Content);
                 action(response.Data, GetErrorString(response));
@@ -37,6 +64,7 @@ namespace AdministrationPanel.Model
 		{
 			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS, RestSharp.Method.GET);
 			request.RequestFormat = RestSharp.DataFormat.Json;
+			request.AddHeader("x-access-token", myToken);
 			m_RestClient.ExecuteAsync<List<User>>(request, (response, callback) =>
 			{
 				LOG(response.Content);
@@ -46,6 +74,7 @@ namespace AdministrationPanel.Model
         public void GetUser(string userId, Action<User, string> action)
         {
             RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS+"/"+userId);
+			request.AddHeader("x-access-token", myToken);
             m_RestClient.ExecuteAsync<User>(request, response =>
             {
                 LOG(response.Content);
@@ -56,6 +85,7 @@ namespace AdministrationPanel.Model
         public void AddUser(User user, Action<User, string> action)
         {
             RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS, Method.POST);
+			request.AddHeader("x-access-token", myToken);
             request.AddJsonBody(user);
             m_RestClient.ExecuteAsync<User>(request, response =>
             {
@@ -67,6 +97,7 @@ namespace AdministrationPanel.Model
         public void GetCards(Action<List<Card>, string> action)
         {
             RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_CARDS, RestSharp.Method.GET);
+			request.AddHeader("x-access-token", myToken);
             request.RequestFormat = RestSharp.DataFormat.Json;
             m_RestClient.ExecuteAsync<List<Card>>(request, (response, callback) =>
             {
@@ -78,6 +109,7 @@ namespace AdministrationPanel.Model
         public void GetDraws(Action<List<Draw>, string> action)
         {
             RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_DRAW, RestSharp.Method.GET);
+			request.AddHeader("x-access-token", myToken);
             request.RequestFormat = RestSharp.DataFormat.Json;
             m_RestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
             {
@@ -89,6 +121,7 @@ namespace AdministrationPanel.Model
         public void GetDraws(Action<List<Draw>, string> action, int count)
         {
             RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_DRAW + "?count=" + count.ToString(), RestSharp.Method.GET);
+			request.AddHeader("x-access-token", myToken);
             request.RequestFormat = RestSharp.DataFormat.Json;
             m_RestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
             {
@@ -100,6 +133,7 @@ namespace AdministrationPanel.Model
 		public void RemoveUser(Action<string> action, string userId)
 		{
 			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS + @"/" + userId, RestSharp.Method.DELETE);
+			request.AddHeader("x-access-token", myToken);
 			request.RequestFormat = RestSharp.DataFormat.Json;
 			m_RestClient.ExecuteAsync(request, (response, callback) =>
 			{
