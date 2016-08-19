@@ -12,6 +12,8 @@ namespace AdministrationPanel.Model
         public static string PING_PATH = "ping";
 		public static string PATH_GET_USERS = @"api/users";
 		public static string PATH_GET_DRAWS = @"api/draws";
+
+		public List<User> UserList;
         
 
         public ParkifyModel(string serverAddress)
@@ -38,7 +40,7 @@ namespace AdministrationPanel.Model
 				LOG(response.Content);
 				action(response.Content);
 
-				List<User> test2 = response.Data;
+				UserList = response.Data;
 			});
 		}
 
