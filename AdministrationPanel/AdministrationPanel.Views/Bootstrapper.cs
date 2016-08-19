@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using AdministrationPanel.ViewModels;
+using AdministrationPanel.ViewModels.UsersTab;
 using Autofac;
 
 namespace AdministrationPanel.Views
@@ -14,6 +15,7 @@ namespace AdministrationPanel.Views
 
             containerBuilder.RegisterType<MainViewModel>();
             containerBuilder.RegisterType<MainWindow>();
+            containerBuilder.RegisterType<UserListViewModel>();
 
             Container = containerBuilder.Build();
         }

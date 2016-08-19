@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministrationPanelViewModelBase.cs" />
-    <Compile Include="HomeTabViewModel.cs" />
+    <Compile Include="HomeTab\HomeTabViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

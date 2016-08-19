@@ -1,23 +1,19 @@
+using AdministrationPanel.ViewModels.UsersTab;
+
 namespace AdministrationPanel.ViewModels
 {
     public class MainViewModel : AdministrationPanelViewModelBase
     {
-        private string _title;
+        private readonly UserListViewModel _userListViewModel;
 
-        public MainViewModel()
+        public UserListViewModel UserListViewModel
         {
-            Title = "My Title";
+            get { return _userListViewModel; }
         }
 
-        public string Title
+        public MainViewModel(UserListViewModel userListViewModel)
         {
-            get { return _title; }
-            set
-            {
-                if (value == _title) return;
-                _title = value;
-                OnPropertyChanged(() => Title);
-            }
+            _userListViewModel = userListViewModel;
         }
     }
 }
