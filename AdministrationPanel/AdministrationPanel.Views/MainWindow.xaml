@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdministrationPanel.Views"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance d:Type=local:MainWindow, IsDesignTimeCreatable=True }"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <TextBlock Text="{Binding Title}" />
     </Grid>
 </Window>
