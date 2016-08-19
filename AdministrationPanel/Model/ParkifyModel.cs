@@ -21,6 +21,8 @@ namespace Model
 
 		string myToken;
 
+
+
         ///////////////////////////////////////////////////////////////////////////
 
         public ParkifyModel(string serverAddress)
@@ -29,7 +31,7 @@ namespace Model
             m_RestClient = new RestSharp.RestClient(m_ServerAddress);
         }
 
-		public void Authenticate(Credentials cred, Action<string> action)
+		public void Authenticate(Credentials cred, Action<Error> action)
 		{
 			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_AUTH, Method.POST);
 			request.RequestFormat = RestSharp.DataFormat.Json;
@@ -37,17 +39,33 @@ namespace Model
 			m_RestClient.ExecuteAsync<AuthResponse>(request, (response, callback) =>
 			{
 				LOG(response.Content);
-				var tokenResponse = response.Data;
-				myToken = tokenResponse.token;
-				action(tokenResponse.message);
 
-				if (!string.IsNullOrEmpty(tokenResponse.token))
+				if (response.StatusCode != System.Net.HttpStatusCode.OK)
 				{
-					OnAuthenticationSucceed(this, EventArgs.Empty);
+					action(new Error(ServerError.AuthenticationFailed, response.ErrorMessage));
 				}
 				else
 				{
-					OnAuthenticationFailed(this, EventArgs.Empty);
+					var tokenResponse = response.Data;
+					if (tokenResponse.user.type == UserType.Admin)
+					{
+						myToken = tokenResponse.token;
+
+						if (!string.IsNullOrEmpty(tokenResponse.token))
+						{
+							action(null);
+							OnAuthenticationSucceed(this, EventArgs.Empty);
+						}
+						else
+						{
+							action(new Error(ServerError.AuthenticationFailed, ""));
+							OnAuthenticationFailed(this, EventArgs.Empty);
+						}
+					}
+					else
+					{
+						action(new Error(ServerError.UserIsNotAdmin, ""));
+					}
 				}
 			});
 		}
