@@ -29,6 +29,17 @@ namespace AdministrationPanel.Views
 
             ParkifyModel model = new ParkifyModel("http://krk.grapeup.com:8080");
 
+            model.SendPing((ping, error) =>
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
+                else
+                {
+                    MessageBox.Show(ping.date.ToString());
+                }
+            });
 			model.GetUsers(ping =>
             {
                 MessageBox.Show(ping);
