@@ -8,21 +8,22 @@ namespace Model
     public class DataProvider : IDataProvider
     {
         private readonly IParkifyModel _model;
-        private TaskCompletionSource<bool> _authenticationCompletionSource;
 
         public DataProvider(IParkifyModel model)
         {
             _model = model;
         }
 
-        public Task<bool> Authenticate()
+        public Task<bool> Authenticate(Credentials credential)
         {
-            _authenticationCompletionSource = new TaskCompletionSource<bool>();
+            var tcs = new TaskCompletionSource<bool>();
 
-            _model.OnAuthenticationSucceed += OnSucceeded;
-            _model.OnAuthenticationFailed += OnFailed;
+            _model.Authenticate(credential, s =>
+            {
+                tcs.SetResult(s == null);
+            });
 
-            return _authenticationCompletionSource.Task;
+            return tcs.Task;
         }
 
         public Task<IEnumerable<User>> GetUsers()
@@ -50,20 +51,6 @@ namespace Model
             _model.GetDraws((draws, s) => { tcs.SetResult(draws); });
 
             return tcs.Task;
-        }
-
-        private void OnFailed(object sender, EventArgs eventArgs)
-        {
-            _authenticationCompletionSource.SetResult(false);
-            _model.OnAuthenticationSucceed -= OnSucceeded;
-            _model.OnAuthenticationFailed -= OnFailed;
-        }
-
-        private void OnSucceeded(object sender, EventArgs eventArgs)
-        {
-            _authenticationCompletionSource.SetResult(true);
-            _model.OnAuthenticationSucceed -= OnSucceeded;
-            _model.OnAuthenticationFailed -= OnFailed;
         }
     }
 }
