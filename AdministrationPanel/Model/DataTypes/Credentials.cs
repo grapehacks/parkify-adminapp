@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdministrationPanel.Model
+namespace Model.DataTypes
 {
 	public class Credentials
 	{
