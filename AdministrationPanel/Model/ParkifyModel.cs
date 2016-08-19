@@ -11,10 +11,12 @@ namespace AdministrationPanel.Model
     {
         public static string PING_PATH = "ping";
 		public static string PATH_GET_USERS = @"api/users";
-		public static string PATH_GET_DRAWS = @"api/draws";
+        public static string PATH_GET_CARDS = @"api/cards";
+        public static string PATH_GET_DRAW = @"api/draw";
 
 		public List<User> UserList;
-        
+
+        ///////////////////////////////////////////////////////////////////////////
 
         public ParkifyModel(string serverAddress)
         {
@@ -44,10 +46,48 @@ namespace AdministrationPanel.Model
 			});
 		}
 
+        public void GetCards(Action<List<Card>, string> action)
+        {
+            RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_CARDS, RestSharp.Method.GET);
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            m_RestClient.ExecuteAsync<List<Card>>(request, (response, callback) =>
+            {
+                LOG(response.Content);
+                action(response.Data, response.ErrorMessage);
+            });
+        }
+
+        public void GetDraws(Action<List<Draw>, string> action)
+        {
+            RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_DRAW, RestSharp.Method.GET);
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            m_RestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
+            {
+                LOG(response.Content);
+                action(response.Data, response.ErrorMessage);
+            });
+        }
+
+        public void GetDraws(Action<List<Draw>, string> action, int count)
+        {
+            RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_DRAW + "?count=" + count.ToString(), RestSharp.Method.GET);
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            m_RestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
+            {
+                LOG(response.Content);
+                action(response.Data, response.ErrorMessage);
+            });
+        }
+
+
+        ///////////////////////////////////////////////////////////////////////////
+
         private void LOG(string log)
         {
             Console.WriteLine(this.GetType().Name + ":: " + log);
         }
+
+        ///////////////////////////////////////////////////////////////////////////
 
         private string m_ServerAddress;
         private RestSharp.RestClient m_RestClient;

@@ -40,6 +40,43 @@ namespace AdministrationPanel.Views
                     MessageBox.Show(ping.date.ToString());
                 }
             });
+
+            model.GetCards((cards, error) =>
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
+                else
+                {
+                    MessageBox.Show(cards.ToString());
+                }
+            });
+
+            model.GetDraws((draws, error) =>
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
+                else
+                {
+                    MessageBox.Show(draws.ToString());
+                }
+            });
+
+            model.GetDraws((draws, error) =>
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                }
+                else
+                {
+                    MessageBox.Show(draws.ToString());
+                }
+            }, 1);
+
 			model.GetUsers(ping =>
             {
                 MessageBox.Show(ping);
