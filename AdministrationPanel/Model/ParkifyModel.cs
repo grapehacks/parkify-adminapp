@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model.DataTypes;
 using RestSharp;
 
-namespace AdministrationPanel.Model
+namespace Model
 {
     public class ParkifyModel
     {

@@ -1,9 +1,9 @@
-﻿using AdministrationPanel.Model;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using GalaSoft.MvvmLight.CommandWpf;
+using Model.DataTypes;
 
-namespace AdministrationPanel.ViewModels
+namespace AdministrationPanel.ViewModels.HomeTab
 {
     public class HomeTabViewModel : AdministrationPanelViewModelBase
     {

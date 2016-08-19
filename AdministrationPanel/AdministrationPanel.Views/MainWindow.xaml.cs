@@ -1,15 +1,17 @@
-﻿using System.Windows;
-using AdministrationPanel.ViewModels;
-using AdministrationPanel.Model;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using Model;
+using Model.DataTypes;
 
 namespace AdministrationPanel.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
 
             ParkifyModel model = new ParkifyModel("http://krk.grapeup.com:8080");
             

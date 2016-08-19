@@ -4,10 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdministrationPanel.Views"
+        xmlns:usersTab="clr-namespace:AdministrationPanel.Views.UsersTab"
+        xmlns:viewModels="clr-namespace:AdministrationPanel.ViewModels;assembly=AdministrationPanel.ViewModels"
+        xmlns:homeTab="clr-namespace:AdministrationPanel.Views.HomeTab"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance d:Type=local:MainWindow, IsDesignTimeCreatable=True }"
-        Title="MainWindow" Height="350" Width="525">
+        d:DataContext="{d:DesignInstance d:Type=viewModels:MainViewModel, IsDesignTimeCreatable=False}"
+        Title="MainWindow" Height="750" Width="525">
+    
     <Grid>
-        <local:HomeTab />
+        <TabControl>
+            <TabItem Header="Home">
+                <homeTab:HomeTab />
+            </TabItem>
+            
+            <TabItem Header="Users">
+                <ContentControl Content="{Binding UserListViewModel}">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <usersTab:UsersTab/>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </TabItem>
+        </TabControl>
     </Grid>
+    
 </Window>

@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:AdministrationPanel.Views.UsersTab"
              xmlns:usersTab="clr-namespace:AdministrationPanel.ViewModels.UsersTab;assembly=AdministrationPanel.ViewModels"
              mc:Ignorable="d"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DataContext="{d:DesignInstance d:Type=usersTab:UserListViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.RowDefinitions>

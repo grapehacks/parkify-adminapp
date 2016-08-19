@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
-using AdministrationPanel.ViewModels;
+using AdministrationPanel.ViewModels.HomeTab;
 
-namespace AdministrationPanel.Views
+namespace AdministrationPanel.Views.HomeTab
 {
     public partial class HomeTab : UserControl
     {
