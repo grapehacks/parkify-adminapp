@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AdministrationPanel.Views"
-             xmlns:viewModels="clr-namespace:AdministrationPanel.ViewModels;assembly=AdministrationPanel.ViewModels"
+             xmlns:homeTab="clr-namespace:AdministrationPanel.ViewModels.HomeTab;assembly=AdministrationPanel.ViewModels"
+             xmlns:dataTypes="clr-namespace:Model.DataTypes;assembly=Model"
+             xmlns:homeTab1="clr-namespace:AdministrationPanel.Views.HomeTab"
              mc:Ignorable="d" 
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             d:DataContext="{d:DesignInstance d:Type=viewModels:HomeTabViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance d:Type=homeTab:HomeTabViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
     
     <UserControl.Resources>
-        <DataTemplate x:Key="HomuListViewItemTemplate" DataType="internalModel:User"/>
+        <homeTab1:ParticipantColorConverter x:Key="ParticipantColorConverter"/>
     </UserControl.Resources>
     
     <Grid>
@@ -60,10 +60,21 @@
             </StackPanel>
 
         </Border>
-        
+
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
-                  ItemsSource="{Binding UsersCollection}"
-                  ItemTemplate="{StaticResource HomuListViewItemTemplate}"/>
+                  ItemsSource="{Binding UsersCollection}">
+            <GridView>
+                <GridViewColumn Header="Username">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type dataTypes:User}">
+                            <TextBlock 
+                                Background="{Binding participate, Converter={StaticResource ParticipantColorConverter}}" 
+                                Text="{Binding name}"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </GridView>
+        </ListView>
         
     </Grid>
 </UserControl>

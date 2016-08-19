@@ -72,7 +72,7 @@ namespace AdministrationPanel.ViewModels.HomeTab
 
         private void ChangeDrawDate()
         {
-            MessageBox.Show("asd");
+            MessageBox.Show("ChangeDrawDate");
         }
         #endregion
     }

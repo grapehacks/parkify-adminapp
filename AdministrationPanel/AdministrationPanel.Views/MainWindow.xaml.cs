@@ -12,7 +12,7 @@ namespace AdministrationPanel.Views
         public MainWindow()
         {
             InitializeComponent();
-
+            /*
             ParkifyModel model = new ParkifyModel("http://krk.grapeup.com:8080");
             
             model.SendPing((ping, error) =>
@@ -114,7 +114,7 @@ namespace AdministrationPanel.Views
                 {
                     MessageBox.Show(user.ToString());
                 }
-            });
+            });*/
         }
     }
 }

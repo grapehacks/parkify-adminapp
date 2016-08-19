@@ -14,7 +14,7 @@
     <Grid>
         <TabControl>
             <TabItem Header="Home">
-                <homeTab:HomeTab />
+                <homeTab:HomeTab DataContext="{Binding HomeTabViewModel}"/>
             </TabItem>
             
             <TabItem Header="Users">
