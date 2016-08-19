@@ -5,171 +5,107 @@ using RestSharp;
 
 namespace Model
 {
-    public class ParkifyModel : IParkifyModel
-    {
-        private const string PathPing = "ping";
-        private const string PathGetUsers = @"api/users";
-        private const string PathGetCards = @"api/cards";
-        private const string PathGetDraw = @"api/draw";
-        private const string PathAuth = @"/authenticate";
+	public partial class ParkifyModel : IParkifyModel
+	{
+		private const string PathPing = "ping";
+		private const string PathGetUsers = @"api/users";
+		private const string PathGetCards = @"api/cards";
+		private const string PathGetDraw = @"api/draw";
+		private const string PathAuth = @"/authenticate";
 
-        public event EventHandler OnAuthenticationSucceed;
+		public event EventHandler OnAuthenticationSucceed;
 		public event EventHandler OnAuthenticationFailed;
 
 		string _myToken;
 
-        ///////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////
 
-        public ParkifyModel(string serverAddress)
-        {
-            _mRestClient = new RestClient(serverAddress);
-        }
-
-        public void Authenticate(Credentials cred, Action<string> action)
+		public ParkifyModel(string serverAddress)
 		{
-		    var request = new RestRequest(PathAuth, Method.POST)
-		    {
-		        RequestFormat = DataFormat.Json
-		    };
+			_mRestClient = new RestClient(serverAddress);
+		}
 
-		    request.AddJsonBody(cred);
+		///////////////////////////////////////////////////////////////////////////
+
+		public void Authenticate(Credentials cred, Action<Error> action)
+		{
+			var request = new RestRequest(PathAuth, Method.POST)
+			{
+				RequestFormat = DataFormat.Json
+			};
+
+			request.AddJsonBody(cred);
 			_mRestClient.ExecuteAsync<AuthResponse>(request, (response, callback) =>
 			{
 				Log(response.Content);
-				var tokenResponse = response.Data;
-				_myToken = tokenResponse.Token;
-				action(tokenResponse.Message);
 
-				if (!string.IsNullOrEmpty(tokenResponse.Token))
+				if (response.StatusCode != System.Net.HttpStatusCode.OK)
 				{
-					OnAuthenticationSucceed(this, EventArgs.Empty);
+					action(new Error(ServerError.AuthenticationFailed, response.ErrorMessage));
 				}
 				else
 				{
-					OnAuthenticationFailed(this, EventArgs.Empty);
+					var tokenResponse = response.Data;
+					if (tokenResponse.user.Type == UserType.Admin)
+					{
+						_myToken = tokenResponse.token;
+
+						if (!string.IsNullOrEmpty(tokenResponse.token))
+						{
+							action(null);
+							OnAuthenticationSucceed(this, EventArgs.Empty);
+						}
+						else
+						{
+							action(new Error(ServerError.AuthenticationFailed, ""));
+							OnAuthenticationFailed(this, EventArgs.Empty);
+						}
+					}
+					else
+					{
+						action(new Error(ServerError.UserIsNotAdmin, ""));
+					}
 				}
 			});
 		}
 
-        public void SendPing(Action<Ping, string> action)
-        {
+		///////////////////////////////////////////////////////////////////////////
+
+		public void SendPing(Action<Ping, string> action)
+		{
 			var request = new RestRequest(PathPing);
-            _mRestClient.ExecuteAsync<Ping>(request, (response, callback) => {
-                Log(response.Content);
-                action(response.Data, GetErrorString(response));
-            });
-        }
-
-		public void GetUsers(Action<IEnumerable<User>, string> action)
-		{
-		    var request = new RestRequest(PathGetUsers, Method.GET)
-		    {
-		        RequestFormat = DataFormat.Json
-		    };
-
-		    request.AddHeader("x-access-token", _myToken);
-			_mRestClient.ExecuteAsync<List<User>>(request, (response, callback) =>
-			{
+			_mRestClient.ExecuteAsync<Ping>(request, (response, callback) => {
 				Log(response.Content);
-                action(response.Data, GetErrorString(response));
-			});
-		}
-        public void GetUser(string userId, Action<User, string> action)
-        {
-            var request = new RestRequest(PathGetUsers+"/"+userId);
-			request.AddHeader("x-access-token", _myToken);
-            _mRestClient.ExecuteAsync<User>(request, response =>
-            {
-                Log(response.Content);
-                action(response.Data, GetErrorString(response));
-            });
-        }
-
-        public void AddUser(User user, Action<User, string> action)
-        {
-            var request = new RestRequest(PathGetUsers, Method.POST);
-			request.AddHeader("x-access-token", _myToken);
-            request.AddJsonBody(user);
-            _mRestClient.ExecuteAsync<User>(request, response =>
-            {
-                Log(response.Content);
-                action(response.Data, GetErrorString(response));
-            });
-        }
-
-        public void GetCards(Action<List<Card>, string> action)
-        {
-            var request = new RestRequest(PathGetCards, Method.GET);
-			request.AddHeader("x-access-token", _myToken);
-            request.RequestFormat = DataFormat.Json;
-            _mRestClient.ExecuteAsync<List<Card>>(request, (response, callback) =>
-            {
-                Log(response.Content);
-                action(response.Data, GetErrorString(response));
-            });
-        }
-
-        public void GetDraws(Action<List<Draw>, string> action)
-        {
-            var request = new RestRequest(PathGetDraw, Method.GET);
-			request.AddHeader("x-access-token", _myToken);
-            request.RequestFormat = DataFormat.Json;
-            _mRestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
-            {
-                Log(response.Content);
-                action(response.Data, GetErrorString(response));
-            });
-        }
-
-        public void GetDraws(Action<List<Draw>, string> action, int count)
-        {
-            var request = new RestRequest(PathGetDraw + "?count=" + count, Method.GET);
-			request.AddHeader("x-access-token", _myToken);
-            request.RequestFormat = DataFormat.Json;
-            _mRestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
-            {
-                Log(response.Content);
-                action(response.Data, GetErrorString(response));
-            });
-        }
-
-		public void RemoveUser(Action<string> action, string userId)
-		{
-			var request = new RestRequest(PathGetUsers + @"/" + userId, Method.DELETE);
-			request.AddHeader("x-access-token", _myToken);
-			request.RequestFormat = DataFormat.Json;
-			_mRestClient.ExecuteAsync(request, (response, callback) =>
-			{
-				Log(response.Content);
-				action(response.ErrorMessage);
+				action(response.Data, GetErrorString(response));
 			});
 		}
 
+		///////////////////////////////////////////////////////////////////////////
 
-        ///////////////////////////////////////////////////////////////////////////
+		private void Log(string log)
+		{
+			Console.WriteLine(GetType().Name + ":: " + log);
+		}
 
-        private void Log(string log)
-        {
-            Console.WriteLine(GetType().Name + ":: " + log);
-        }
+		///////////////////////////////////////////////////////////////////////////
 
-        private string GetErrorString(IRestResponse restResponse)
-        {
-            if (restResponse.ErrorMessage != null)
-            {
-                return restResponse.ErrorMessage;
-            }
+		private string GetErrorString(IRestResponse restResponse)
+		{
+			if (restResponse.ErrorMessage != null)
+			{
+				return restResponse.ErrorMessage;
+			}
 
-            if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                return restResponse.StatusDescription;
-            }
+			if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
+			{
+				return restResponse.StatusDescription;
+			}
 
-            return null;
-        }
+			return null;
+		}
 
-        ///////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////
 
-        private readonly RestClient _mRestClient;
-    }
+		private readonly RestClient _mRestClient;
+	}
 }

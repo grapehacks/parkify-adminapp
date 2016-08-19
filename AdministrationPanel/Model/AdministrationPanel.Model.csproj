@@ -44,11 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ModelCards.cs" />
+    <Compile Include="Controller\ModelDraws.cs" />
+    <Compile Include="Controller\ModelUsers.cs" />
     <Compile Include="DataProvider.cs" />
     <Compile Include="DataTypes\AuthResponse.cs" />
     <Compile Include="DataTypes\Card.cs" />
     <Compile Include="DataTypes\Credentials.cs" />
     <Compile Include="DataTypes\Draw.cs" />
+    <Compile Include="DataTypes\Error.cs" />
     <Compile Include="DataTypes\History.cs" />
     <Compile Include="DataTypes\Ping.cs" />
     <Compile Include="DataTypes\UserParticipate.cs" />
