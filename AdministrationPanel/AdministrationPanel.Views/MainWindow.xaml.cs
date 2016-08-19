@@ -77,6 +77,7 @@ namespace AdministrationPanel.Views
                 }
             }, 1);
 
+			IEnumerable<User> Users;
 			model.GetUsers((users, error) =>
             {
 				if (error != null)
@@ -86,6 +87,25 @@ namespace AdministrationPanel.Views
 				else
 				{
 					MessageBox.Show(String.Join(", ", users));
+					Users = users;
+					bool removeUser = false;
+
+					if (removeUser)
+					{
+						var UserItem = users.ElementAt(2);
+
+						model.RemoveUser((error2) =>
+						{
+							if (error != null)
+							{
+								MessageBox.Show(error2);
+							}
+							else
+							{
+								MessageBox.Show("User removed");
+							}
+						}, UserItem._id);
+					}
 				}
             });
             

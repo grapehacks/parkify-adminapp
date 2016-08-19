@@ -97,6 +97,17 @@ namespace AdministrationPanel.Model
             });
         }
 
+		public void RemoveUser(Action<string> action, string userId)
+		{
+			RestSharp.RestRequest request = new RestSharp.RestRequest(PATH_GET_USERS + @"/" + userId, RestSharp.Method.DELETE);
+			request.RequestFormat = RestSharp.DataFormat.Json;
+			m_RestClient.ExecuteAsync(request, (response, callback) =>
+			{
+				LOG(response.Content);
+				action(response.ErrorMessage);
+			});
+		}
+
 
         ///////////////////////////////////////////////////////////////////////////
 
