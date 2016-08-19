@@ -5,15 +5,15 @@ using RestSharp;
 
 namespace Model
 {
-    public class ParkifyModel
+    public class ParkifyModel : IParkifyModel
     {
-		static string _pathPing = "ping";
-		static string _pathGetUsers = @"api/users";
-        static string _pathGetCards = @"api/cards";
-		static string _pathGetDraw = @"api/draw";
-		static string _pathAuth = @"/authenticate";
+        private const string PathPing = "ping";
+        private const string PathGetUsers = @"api/users";
+        private const string PathGetCards = @"api/cards";
+        private const string PathGetDraw = @"api/draw";
+        private const string PathAuth = @"/authenticate";
 
-		public event EventHandler OnAuthenticationSucceed;
+        public event EventHandler OnAuthenticationSucceed;
 		public event EventHandler OnAuthenticationFailed;
 
 		string _myToken;
@@ -22,15 +22,17 @@ namespace Model
 
         public ParkifyModel(string serverAddress)
         {
-            _mServerAddress = serverAddress;
-            _mRestClient = new RestSharp.RestClient(_mServerAddress);
+            _mRestClient = new RestClient(serverAddress);
         }
 
-		public void Authenticate(Credentials cred, Action<string> action)
+        public void Authenticate(Credentials cred, Action<string> action)
 		{
-			RestSharp.RestRequest request = new RestSharp.RestRequest(_pathAuth, Method.POST);
-			request.RequestFormat = RestSharp.DataFormat.Json;
-			request.AddJsonBody(cred);
+		    var request = new RestRequest(PathAuth, Method.POST)
+		    {
+		        RequestFormat = DataFormat.Json
+		    };
+
+		    request.AddJsonBody(cred);
 			_mRestClient.ExecuteAsync<AuthResponse>(request, (response, callback) =>
 			{
 				Log(response.Content);
@@ -51,7 +53,7 @@ namespace Model
 
         public void SendPing(Action<Ping, string> action)
         {
-			RestSharp.RestRequest request = new RestSharp.RestRequest(_pathPing);
+			var request = new RestRequest(PathPing);
             _mRestClient.ExecuteAsync<Ping>(request, (response, callback) => {
                 Log(response.Content);
                 action(response.Data, GetErrorString(response));
@@ -60,9 +62,12 @@ namespace Model
 
 		public void GetUsers(Action<IEnumerable<User>, string> action)
 		{
-			RestSharp.RestRequest request = new RestSharp.RestRequest(_pathGetUsers, RestSharp.Method.GET);
-			request.RequestFormat = RestSharp.DataFormat.Json;
-			request.AddHeader("x-access-token", _myToken);
+		    var request = new RestRequest(PathGetUsers, Method.GET)
+		    {
+		        RequestFormat = DataFormat.Json
+		    };
+
+		    request.AddHeader("x-access-token", _myToken);
 			_mRestClient.ExecuteAsync<List<User>>(request, (response, callback) =>
 			{
 				Log(response.Content);
@@ -71,7 +76,7 @@ namespace Model
 		}
         public void GetUser(string userId, Action<User, string> action)
         {
-            RestSharp.RestRequest request = new RestSharp.RestRequest(_pathGetUsers+"/"+userId);
+            var request = new RestRequest(PathGetUsers+"/"+userId);
 			request.AddHeader("x-access-token", _myToken);
             _mRestClient.ExecuteAsync<User>(request, response =>
             {
@@ -82,7 +87,7 @@ namespace Model
 
         public void AddUser(User user, Action<User, string> action)
         {
-            RestSharp.RestRequest request = new RestSharp.RestRequest(_pathGetUsers, Method.POST);
+            var request = new RestRequest(PathGetUsers, Method.POST);
 			request.AddHeader("x-access-token", _myToken);
             request.AddJsonBody(user);
             _mRestClient.ExecuteAsync<User>(request, response =>
@@ -94,9 +99,9 @@ namespace Model
 
         public void GetCards(Action<List<Card>, string> action)
         {
-            RestSharp.RestRequest request = new RestSharp.RestRequest(_pathGetCards, RestSharp.Method.GET);
+            var request = new RestRequest(PathGetCards, Method.GET);
 			request.AddHeader("x-access-token", _myToken);
-            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.RequestFormat = DataFormat.Json;
             _mRestClient.ExecuteAsync<List<Card>>(request, (response, callback) =>
             {
                 Log(response.Content);
@@ -106,9 +111,9 @@ namespace Model
 
         public void GetDraws(Action<List<Draw>, string> action)
         {
-            RestSharp.RestRequest request = new RestSharp.RestRequest(_pathGetDraw, RestSharp.Method.GET);
+            var request = new RestRequest(PathGetDraw, Method.GET);
 			request.AddHeader("x-access-token", _myToken);
-            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.RequestFormat = DataFormat.Json;
             _mRestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
             {
                 Log(response.Content);
@@ -118,9 +123,9 @@ namespace Model
 
         public void GetDraws(Action<List<Draw>, string> action, int count)
         {
-            RestSharp.RestRequest request = new RestSharp.RestRequest(_pathGetDraw + "?count=" + count.ToString(), RestSharp.Method.GET);
+            var request = new RestRequest(PathGetDraw + "?count=" + count, Method.GET);
 			request.AddHeader("x-access-token", _myToken);
-            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.RequestFormat = DataFormat.Json;
             _mRestClient.ExecuteAsync<List<Draw>>(request, (response, callback) =>
             {
                 Log(response.Content);
@@ -130,9 +135,9 @@ namespace Model
 
 		public void RemoveUser(Action<string> action, string userId)
 		{
-			RestSharp.RestRequest request = new RestSharp.RestRequest(_pathGetUsers + @"/" + userId, RestSharp.Method.DELETE);
+			var request = new RestRequest(PathGetUsers + @"/" + userId, Method.DELETE);
 			request.AddHeader("x-access-token", _myToken);
-			request.RequestFormat = RestSharp.DataFormat.Json;
+			request.RequestFormat = DataFormat.Json;
 			_mRestClient.ExecuteAsync(request, (response, callback) =>
 			{
 				Log(response.Content);
@@ -145,7 +150,7 @@ namespace Model
 
         private void Log(string log)
         {
-            Console.WriteLine(this.GetType().Name + ":: " + log);
+            Console.WriteLine(GetType().Name + ":: " + log);
         }
 
         private string GetErrorString(IRestResponse restResponse)
@@ -165,7 +170,6 @@ namespace Model
 
         ///////////////////////////////////////////////////////////////////////////
 
-        private string _mServerAddress;
-        private RestSharp.RestClient _mRestClient;
+        private readonly RestClient _mRestClient;
     }
 }

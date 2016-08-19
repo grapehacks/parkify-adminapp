@@ -1,5 +1,6 @@
 ﻿namespace Model.DataTypes
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Draw
     {
         User Winner { get; set; }

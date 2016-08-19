@@ -17,7 +17,7 @@ namespace AdministrationPanel.Views
             /*
             _model = new ParkifyModel("http://krk.grapeup.com:8080");
 
-			Credentials cred = new Credentials();
+			var cred = new Credentials();
 			cred.Email = "email@test.com";
 			cred.Password = "test_pass";
 
@@ -97,7 +97,7 @@ namespace AdministrationPanel.Views
 				{
 					MessageBox.Show(String.Join(", ", users));
 					Users = users;
-					bool removeUser = false;
+					var removeUser = false;
 
 					if (removeUser)
 					{
@@ -118,7 +118,7 @@ namespace AdministrationPanel.Views
 				}
 			});
 
-			User a = new User();
+			var a = new User();
 			a.Name = "Krol Lew";
 			a.Email = "krol@lew.pl";
 			a.Participate = UserParticipate.Yes;

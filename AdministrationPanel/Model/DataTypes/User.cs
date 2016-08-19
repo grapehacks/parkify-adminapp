@@ -1,18 +1,5 @@
 ﻿namespace Model.DataTypes
 {
-    public enum UserType
-    {
-        User,
-        Admin
-    }
-
-    public enum UserParticipate
-    {
-        No,
-		Yes,
-		NotDefined
-    }
-
     public class User
     {
 		public string Id { get; set; }
