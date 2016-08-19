@@ -77,9 +77,16 @@ namespace AdministrationPanel.Views
                 }
             }, 1);
 
-			model.GetUsers(ping =>
+			model.GetUsers((users, error) =>
             {
-                MessageBox.Show(ping);
+				if (error != null)
+				{
+					MessageBox.Show(error);
+				}
+				else
+				{
+					MessageBox.Show(users.ToString());
+				}
             });
         }
     }
