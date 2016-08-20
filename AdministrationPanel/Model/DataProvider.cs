@@ -14,13 +14,13 @@ namespace Model
             _model = model;
         }
 
-        public Task<bool> Authenticate(Credentials credential)
+        public Task<Error> Authenticate(Credentials credential)
         {
-            var tcs = new TaskCompletionSource<bool>();
+            var tcs = new TaskCompletionSource<Error>();
 
-            _model.Authenticate(credential, s =>
+            _model.Authenticate(credential, error =>
             {
-                tcs.SetResult(s == null);
+                tcs.SetResult(error);
             });
 
             return tcs.Task;

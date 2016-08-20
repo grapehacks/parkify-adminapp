@@ -10,6 +10,8 @@ namespace AdministrationPanel.Views
         private readonly MainWindow _mainWindow;
         private readonly LoginWindowViewModel _loginWindowViewModel;
         private readonly LoginWindow _loginWindow;
+        private readonly CalendarPickerWindow _calendarPickerWindow;
+        private readonly CalendarWindowViewModel _calendarViewModel;
         private readonly IMessenger _messenger;
 
         public WindowManager(
@@ -17,6 +19,8 @@ namespace AdministrationPanel.Views
             MainWindow mainWindow, 
             LoginWindowViewModel loginWindowViewModel, 
             LoginWindow loginWindow, 
+            CalendarWindowViewModel calendarViewModel,
+            CalendarPickerWindow calendarWindow,
             IMessenger messenger)
         {
             _mainViewModel = mainViewModel;
@@ -25,11 +29,18 @@ namespace AdministrationPanel.Views
             _loginWindow = loginWindow;
             _messenger = messenger;
 
+            _calendarViewModel = calendarViewModel;
+            _calendarPickerWindow = calendarWindow;
+            _calendarPickerWindow.DataContext = _calendarViewModel;
+
             _mainWindow.DataContext = mainViewModel;
             _loginWindow.DataContext = loginWindowViewModel;
 
             _messenger.Register<LoggedInMessage>(this, OnLoggedInMessage);
             _messenger.Register<LoggedOutMessage>(this, OnLoggedOutMessage);
+
+            _messenger.Register<ShowCalendarPickerMessage>(this, ShowCalendar);
+            _messenger.Register<CloseCalendarPickerMessage>(this, HideCalendar);
         }
 
         private void OnLoggedOutMessage(LoggedOutMessage obj)
@@ -52,6 +63,16 @@ namespace AdministrationPanel.Views
         {
             _loginWindow.Hide();
             _mainWindow.Show();
+        }
+
+        public void ShowCalendar(ShowCalendarPickerMessage msg)
+        {
+            _calendarPickerWindow.ShowDialog();
+        }
+
+        public void HideCalendar(CloseCalendarPickerMessage msg)
+        {
+            _calendarPickerWindow.Hide();
         }
     }
 }

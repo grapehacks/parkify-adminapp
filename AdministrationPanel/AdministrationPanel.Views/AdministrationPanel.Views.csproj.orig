@@ -82,11 +82,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Compile Include="CalendarPickerWindow.xaml.cs">
       <DependentUpon>CalendarPickerWindow.xaml</DependentUpon>
-    </Compile>
+=======
     <Compile Include="CardsTab\CardsTab.xaml.cs">
       <DependentUpon>CardsTab.xaml</DependentUpon>
+>>>>>>> 308c229d2515864468a0a807b5f510d79f1fe4a9
     </Compile>
     <Compile Include="HistoryTab\HistoryTab.xaml.cs">
       <DependentUpon>HistoryTab.xaml</DependentUpon>
@@ -98,13 +100,15 @@
     <Compile Include="UsersTab\UsersTab.xaml.cs">
       <DependentUpon>UsersTab.xaml</DependentUpon>
     </Compile>
-    <Page Include="CardsTab\CardsTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+<<<<<<< HEAD
     <Page Include="CalendarPickerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+=======
+    <Page Include="CardsTab\CardsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+>>>>>>> 308c229d2515864468a0a807b5f510d79f1fe4a9
     </Page>
     <Page Include="HistoryTab\HistoryTab.xaml">
       <SubType>Designer</SubType>
