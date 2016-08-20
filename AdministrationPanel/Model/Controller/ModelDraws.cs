@@ -33,5 +33,18 @@ namespace Model
 				action(response.Data, GetErrorString(response));
 			});
 		}
+
+		public void GetDraws(Action<string> action, Ping date)
+		{
+			RestSharp.RestRequest request = new RestSharp.RestRequest(PathDrawDate, RestSharp.Method.PUT);
+			request.AddHeader("x-access-token", _myToken);
+			request.RequestFormat = RestSharp.DataFormat.Json;
+			request.AddJsonBody(date);
+			_mRestClient.ExecuteAsync(request, (response, callback) =>
+			{
+				Log(response.Content);
+				action(GetErrorString(response));
+			});
+		}
 	}
 }
