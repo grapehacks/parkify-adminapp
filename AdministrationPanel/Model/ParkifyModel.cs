@@ -41,7 +41,7 @@ namespace Model
 
 				if (response.StatusCode != System.Net.HttpStatusCode.OK)
 				{
-					action(new Error(ServerError.AuthenticationFailed, response.ErrorMessage));
+					action(new Error(ServerError.AuthenticationFailed, GetErrorString(response)));
 				}
 				else
 				{
@@ -57,7 +57,7 @@ namespace Model
 						}
 						else
 						{
-							action(new Error(ServerError.AuthenticationFailed, ""));
+							action(new Error(ServerError.AuthenticationFailed, GetErrorString(response)));
 							OnAuthenticationFailed(this, EventArgs.Empty);
 						}
 					}
