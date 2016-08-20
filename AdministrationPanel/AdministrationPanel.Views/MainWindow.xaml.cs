@@ -15,25 +15,25 @@ namespace AdministrationPanel.Views
         {
             InitializeComponent();
             
-            _model = new ParkifyModel("http://krk.grapeup.com:8080");
+   //         _model = new ParkifyModel();
 
-			var cred = new Credentials();
-			cred.email = "email@test.com";
-			cred.password = "test_pass";
+			//var cred = new Credentials();
+			//cred.email = "email@test.com";
+			//cred.password = "test_pass";
 
-			_model.OnAuthenticationSucceed += model_OnAuthenticationSucceed;
+			//_model.OnAuthenticationSucceed += model_OnAuthenticationSucceed;
 
-			_model.Authenticate(cred, (error) =>
-			{
-				if (error != null)
-				{
-					MessageBox.Show(error.errorMessage);
-				}
-				else
-				{
-					MessageBox.Show("Auth success");
-				}
-			});
+			//_model.Authenticate(cred, (error) =>
+			//{
+			//	if (error != null)
+			//	{
+			//		MessageBox.Show(error.errorMessage);
+			//	}
+			//	else
+			//	{
+			//		MessageBox.Show("Auth success");
+			//	}
+			//});
         }
 
 		void model_OnAuthenticationSucceed(object sender, EventArgs e)

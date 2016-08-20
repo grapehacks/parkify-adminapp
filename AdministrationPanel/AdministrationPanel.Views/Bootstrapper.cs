@@ -3,6 +3,7 @@ using AdministrationPanel.ViewModels;
 using AdministrationPanel.ViewModels.HomeTab;
 using AdministrationPanel.ViewModels.UsersTab;
 using Autofac;
+using GalaSoft.MvvmLight.Messaging;
 using Model;
 
 namespace AdministrationPanel.Views
@@ -15,15 +16,16 @@ namespace AdministrationPanel.Views
         {
             var containerBuilder = new ContainerBuilder();
 
-            containerBuilder.RegisterType<MainViewModel>();
-            containerBuilder.RegisterType<MainWindow>();
-            containerBuilder.RegisterType<UserListViewModel>();
-            containerBuilder.RegisterType<HomeTabViewModel>();
-            containerBuilder.RegisterType<LoginWindow>();
-            containerBuilder.RegisterType<LoginWindowViewModel>();
-            containerBuilder.RegisterType<WindowManager>();
-            containerBuilder.RegisterType<DataProvider>().As<IDataProvider>();
-            containerBuilder.RegisterType<ParkifyModel>().As<IParkifyModel>();
+            containerBuilder.RegisterType<MainViewModel>().SingleInstance();
+            containerBuilder.RegisterType<MainWindow>().SingleInstance();
+            containerBuilder.RegisterType<UserListViewModel>().SingleInstance();
+            containerBuilder.RegisterType<HomeTabViewModel>().SingleInstance();
+            containerBuilder.RegisterType<LoginWindow>().SingleInstance();
+            containerBuilder.RegisterType<LoginWindowViewModel>().SingleInstance();
+            containerBuilder.RegisterType<WindowManager>().SingleInstance();
+            containerBuilder.RegisterType<DataProvider>().As<IDataProvider>().SingleInstance();
+            containerBuilder.RegisterType<ParkifyModel>().As<IParkifyModel>().SingleInstance();
+            containerBuilder.RegisterType<Messenger>().As<IMessenger>().SingleInstance();
 
             Container = containerBuilder.Build();
         }

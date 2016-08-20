@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using AdministrationPanel.ViewModels.Messages;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using Model;
 using Model.DataTypes;
 
@@ -9,14 +11,16 @@ namespace AdministrationPanel.ViewModels
     {
         private readonly IDataProvider _dataProvider;
         private readonly RelayCommand _loginCommand;
+        private readonly IMessenger _messenger;
 
         private string _email;
         private string _error;
         private string _password;
 
-        public LoginWindowViewModel(IDataProvider dataProvider)
+        public LoginWindowViewModel(IDataProvider dataProvider, IMessenger messenger)
         {
             _dataProvider = dataProvider;
+            _messenger = messenger;
             _loginCommand = new RelayCommand(Login);
         }
 
@@ -62,18 +66,20 @@ namespace AdministrationPanel.ViewModels
         {
             var credential = new Credentials
             {
-                Email = Email,
-                Password = Password
+                email = Email,
+                password = Password
             };
 
             var result = await _dataProvider.Authenticate(credential);
 
             if (result)
             {
-                MessageBox.Show("Success");
+                _messenger.Send(new LoggedInMessage());
             }
             else
             {
+                Email = string.Empty;
+                Password = string.Empty;
                 Error = "Login failed";
             }
         }
