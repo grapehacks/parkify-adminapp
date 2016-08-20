@@ -1,5 +1,6 @@
 using System.Windows;
 using GalaSoft.MvvmLight.CommandWpf;
+using Model;
 
 namespace AdministrationPanel.ViewModels.UsersTab
 {
@@ -8,10 +9,12 @@ namespace AdministrationPanel.ViewModels.UsersTab
         private readonly string _id;
         private readonly RelayCommand _editCommand;
         private readonly RelayCommand _removeCommand;
+        private readonly IDataProvider _dataProvider;
 
-        public ActionsViewModel(string id)
+        public ActionsViewModel(string id, IDataProvider dataProvider)
         {
             _id = id;
+            _dataProvider = dataProvider;
             _editCommand = new RelayCommand(EditUser);
             _removeCommand = new RelayCommand(RemoveUser);
         }
@@ -31,9 +34,9 @@ namespace AdministrationPanel.ViewModels.UsersTab
             MessageBox.Show(string.Format("Call EditUser({0})", _id));
         }
 
-        private void RemoveUser()
+        private async void RemoveUser()
         {
-            MessageBox.Show(string.Format("Call RemoveUser({0})", _id));
+            var result = await _dataProvider.RemoveUser(_id);
         }
     }
 }
