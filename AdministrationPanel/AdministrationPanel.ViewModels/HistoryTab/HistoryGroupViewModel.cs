@@ -14,7 +14,7 @@ namespace AdministrationPanel.ViewModels.HistoryTab
             _drawDate = draws.First().Date;
             var tmp = draws.ToList();
             _items = tmp
-                .Where(d=>d.card != null && d.card.name != null && d.winner != null && d.winner.name != null)
+                .Where(d=>d.winner != null && d.card.name != null && d.winner != null && d.winner.name != null)
                 .Select(d => new HistoryItemViewModel(d.card.name, d.winner.name)).ToList();
         }
 
