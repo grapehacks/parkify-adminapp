@@ -2,29 +2,29 @@
 {
     public class User
     {
-		public string Id { get; set; }
+		public string _id { get; set; }
 
-		public string Email { get; set; }
+		public string email { get; set; }
 
-		public string Name { get; set; }
+		public string name { get; set; }
 
-		public string Password { get; set; }
+		public string password { get; set; }
 
-		public bool Removed { get; set; }
+		public bool removed { get; set; }
 
-		public int UnreadMsgCounter { get; set; }
+		public int unreadMsgCounter { get; set; }
 
-		public int V { get; set; }
+		public int __v { get; set; }
 		
-        public bool RememberLastChoice { get; set; }
+        public bool rememberLastChoice { get; set; }
 
-		public UserParticipate Participate { get; set; }
+		public UserParticipate participate { get; set; }
 
-		public UserType Type { get; set; }
+		public UserType type { get; set; }
 
         public override string ToString()
         {
-            return Id + ": " + Email + " - " + Name;
+			return _id + ": " + email + " - " + name;
         }
     }   
 }

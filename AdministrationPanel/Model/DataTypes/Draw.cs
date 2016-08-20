@@ -3,13 +3,13 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Draw
     {
-        User Winner { get; set; }
+        User winner { get; set; }
 
-        Card Card { get; set; }
+        Card card { get; set; }
 
         public override string ToString()
         {
-            return (Winner != null ? Winner.Name : "[NO USER]") + " " + (Card != null ? Card.Name : "[NO CARD]");
+            return (winner != null ? winner.name : "[NO USER]") + " " + (card != null ? card.name : "[NO CARD]");
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Model
 				else
 				{
 					var tokenResponse = response.Data;
-					if (tokenResponse.user.Type == UserType.Admin)
+					if (tokenResponse.user.type == UserType.Admin)
 					{
 						_myToken = tokenResponse.token;
 
