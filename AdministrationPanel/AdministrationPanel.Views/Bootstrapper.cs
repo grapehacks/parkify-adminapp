@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using AdministrationPanel.ViewModels;
+using AdministrationPanel.ViewModels.HistoryTab;
 using AdministrationPanel.ViewModels.HomeTab;
 using AdministrationPanel.ViewModels.UsersTab;
 using Autofac;
@@ -18,6 +19,8 @@ namespace AdministrationPanel.Views
             containerBuilder.RegisterType<MainWindow>();
             containerBuilder.RegisterType<UserListViewModel>();
             containerBuilder.RegisterType<HomeTabViewModel>();
+            containerBuilder.RegisterType<HistoryTabViewModel>();
+            containerBuilder.RegisterType<HistoryItemViewModel>();
 
             Container = containerBuilder.Build();
         }

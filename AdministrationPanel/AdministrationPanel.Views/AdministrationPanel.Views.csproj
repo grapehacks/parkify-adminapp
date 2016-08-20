@@ -82,10 +82,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HistoryTab\HistoryTab.xaml.cs">
+      <DependentUpon>HistoryTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HomeTab\ParticipantColorConverter.cs" />
     <Compile Include="UsersTab\UsersTab.xaml.cs">
       <DependentUpon>UsersTab.xaml</DependentUpon>
     </Compile>
+    <Page Include="HistoryTab\HistoryTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HomeTab\HomeTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
