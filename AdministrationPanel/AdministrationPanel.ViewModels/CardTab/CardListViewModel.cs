@@ -34,6 +34,7 @@ namespace AdministrationPanel.ViewModels.CardsTab
 		public async void Load()
 		{
 			var cards = await _dataProvider.GetCards();
+			var users = await _dataProvider.GetUsers();
 			var cardList = cards == null ? new List<Card>() : cards.ToList();
 
 			var cardViewModels = cardList
@@ -42,9 +43,17 @@ namespace AdministrationPanel.ViewModels.CardsTab
 					card.type,
 					card.removed,
 					card.active,
-					card.user));
+					GetUserForCard(users, card.user)));
 
 			CardList = new ObservableCollection<CardViewModel>(cardViewModels);
+		}
+
+		private static string GetUserForCard(IEnumerable<User> users, string userId)
+		{
+			var user = users.FirstOrDefault(c => c._id == userId);
+			return user == null
+				? string.Empty
+				: user.name;
 		}
     }
 }

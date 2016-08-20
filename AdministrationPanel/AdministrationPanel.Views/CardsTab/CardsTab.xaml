@@ -30,7 +30,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <CheckBox IsChecked="{Binding Active}" />
+                                    <CheckBox IsChecked="{Binding Active}" IsEnabled="False" />
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
