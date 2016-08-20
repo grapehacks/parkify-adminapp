@@ -1,24 +1,43 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using GalaSoft.MvvmLight.CommandWpf;
+using Model;
 using Model.DataTypes;
 
 namespace AdministrationPanel.ViewModels.HomeTab
 {
     public class HomeTabViewModel : AdministrationPanelViewModelBase
     {
-        public HomeTabViewModel()
+        private readonly IDataProvider _dataProvider;
+        public HomeTabViewModel(IDataProvider dataProvider)
         {
-            _usersCollection = new ObservableCollection<HomeTabUserViewModel>
+            _dataProvider = dataProvider;
+            Init();
+        }
+
+
+        private async void Init2()
+        {
+            var usersList = await  _dataProvider.GetUsers();
+            foreach (var user in usersList)
             {
-                new HomeTabUserViewModel {Name = "Yes", UserParticipate = UserParticipate.Yes},
-                new HomeTabUserViewModel {Name = "No", UserParticipate = UserParticipate.No},
-                new HomeTabUserViewModel {Name = "Unknown", UserParticipate = UserParticipate.NotDefined}
-            };
+                _usersCollection.Add(new HomeTabUserViewModel(user));
+            }
+
+            var cardsList = await _dataProvider.GetCards();
+
+
+            var drawsList = await _dataProvider.GetDraws();
+
+
+        }
+        private void Init()
+        {
 
             AvailibleCards = "7";
             UpcomingDraw = "28-10-2016";
             TotalCards = "10";
+
         }
 
         private ObservableCollection<HomeTabUserViewModel> _usersCollection;
