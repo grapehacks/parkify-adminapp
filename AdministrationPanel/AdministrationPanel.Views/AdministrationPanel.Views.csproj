@@ -85,6 +85,9 @@
     <Compile Include="CalendarPickerWindow.xaml.cs">
       <DependentUpon>CalendarPickerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CardsTab\CardsTab.xaml.cs">
+      <DependentUpon>CardsTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HistoryTab\HistoryTab.xaml.cs">
       <DependentUpon>HistoryTab.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,10 @@
     <Compile Include="UsersTab\UsersTab.xaml.cs">
       <DependentUpon>UsersTab.xaml</DependentUpon>
     </Compile>
+    <Page Include="CardsTab\CardsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CalendarPickerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

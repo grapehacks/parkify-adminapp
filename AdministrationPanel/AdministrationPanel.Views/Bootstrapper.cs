@@ -3,6 +3,7 @@ using AdministrationPanel.ViewModels;
 using AdministrationPanel.ViewModels.HistoryTab;
 using AdministrationPanel.ViewModels.HomeTab;
 using AdministrationPanel.ViewModels.UsersTab;
+using AdministrationPanel.ViewModels.CardsTab;
 using Autofac;
 using GalaSoft.MvvmLight.Messaging;
 using Model;
@@ -19,7 +20,8 @@ namespace AdministrationPanel.Views
 
             containerBuilder.RegisterType<MainViewModel>();
             containerBuilder.RegisterType<MainWindow>();
-            containerBuilder.RegisterType<UserListViewModel>();
+			containerBuilder.RegisterType<UserListViewModel>();
+			containerBuilder.RegisterType<CardListViewModel>();
             containerBuilder.RegisterType<HomeTabViewModel>();
             containerBuilder.RegisterType<HistoryTabViewModel>();
             containerBuilder.RegisterType<HistoryItemViewModel>();
@@ -27,7 +29,8 @@ namespace AdministrationPanel.Views
             containerBuilder.RegisterType<CalendarWindowViewModel>();
             containerBuilder.RegisterType<MainViewModel>().SingleInstance();
             containerBuilder.RegisterType<MainWindow>().SingleInstance();
-            containerBuilder.RegisterType<UserListViewModel>().SingleInstance();
+			containerBuilder.RegisterType<UserListViewModel>().SingleInstance();
+			containerBuilder.RegisterType<CardListViewModel>().SingleInstance();
             containerBuilder.RegisterType<HomeTabViewModel>().SingleInstance();
             containerBuilder.RegisterType<LoginWindow>().SingleInstance();
             containerBuilder.RegisterType<LoginWindowViewModel>().SingleInstance();
