@@ -46,11 +46,18 @@ namespace AdministrationPanel.ViewModels.HomeTab
                 _availibleCards = list.Count(x => x.active && !x.removed).ToString();
             }
 
-            UpcomingDraw = "28-10-2016";
+			var date = await _dataProvider.GetDrawTime();
+			if (date != null)
+			{
+				UpcomingDraw = date.date;
+			}
+
+			UpcomingDraw.ToShortDateString();
+            //UpcomingDraw = "28-10-2016";
         }
 
         private ObservableCollection<HomeTabUserViewModel> _usersCollection;
-        private string _upcomingDraw;
+        private System.DateTime _upcomingDraw;
         private string _availibleCards;
         private string _totalCards;
 
@@ -64,7 +71,7 @@ namespace AdministrationPanel.ViewModels.HomeTab
                 OnPropertyChanged(() => UsersCollection);
             }
         }
-        public string UpcomingDraw
+		public System.DateTime UpcomingDraw
         {
             get { return _upcomingDraw; }
             set

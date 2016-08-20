@@ -11,5 +11,6 @@ namespace Model
         Task<IEnumerable<Card>> GetCards();
         Task<IEnumerable<Draw>> GetDraws();
         Task<bool> SetDrawDate(Ping date);
+		Task<Ping> GetDrawTime();
     }
 }

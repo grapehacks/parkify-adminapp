@@ -46,7 +46,7 @@
                         Padding="0"
                     Content="Zmień datę losowania" Command="{Binding ChangeDrawDateCommand}"/>
                 <TextBlock Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
-                           Text="{Binding UpcomingDraw}" 
+                           Text="{Binding UpcomingDraw.ToShortDateString()}" 
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"/>
             </Grid>

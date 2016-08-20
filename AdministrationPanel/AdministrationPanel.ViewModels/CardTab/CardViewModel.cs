@@ -39,7 +39,7 @@
             get { return _active; }
         }
 		
-		public string userName
+		public string UserName
         {
             get { return _userName; }
         }

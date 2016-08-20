@@ -68,5 +68,14 @@ namespace Model
         {
             
         }
+
+		public Task<Ping> GetDrawTime()
+		{
+			var tcs = new TaskCompletionSource<Ping>();
+
+			_model.PingForDate((date, s) => { tcs.SetResult(date); });
+
+			return tcs.Task;
+		}
     }
 }
