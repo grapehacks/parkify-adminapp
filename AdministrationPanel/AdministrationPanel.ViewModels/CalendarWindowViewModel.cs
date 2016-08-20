@@ -41,9 +41,11 @@ namespace AdministrationPanel.ViewModels
         
         private async void SetDate()
         {
-            var result = 0;//await _dataProvider.;
-
-            _messenger.Send(new CloseCalendarPickerMessage());
+            Ping datePing = new Ping();
+            datePing.date = Date;
+            var result = await _dataProvider.SetDrawDate(datePing);
+            if (result)
+                _messenger.Send(new CloseCalendarPickerMessage());
         }
     }
 }

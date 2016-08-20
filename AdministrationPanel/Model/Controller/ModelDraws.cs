@@ -34,7 +34,7 @@ namespace Model
 			});
 		}
 
-		public void GetDraws(Action<string> action, Ping date)
+		public void SetDrawDate(Action<string> action, Ping date)
 		{
 			RestSharp.RestRequest request = new RestSharp.RestRequest(PathDrawDate, RestSharp.Method.PUT);
 			request.AddHeader("x-access-token", _myToken);
