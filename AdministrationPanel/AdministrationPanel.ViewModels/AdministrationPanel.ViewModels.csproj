@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministrationPanelViewModelBase.cs" />
+    <Compile Include="HistoryTab\HistoryItemCardsViewModel.cs" />
     <Compile Include="HistoryTab\HistoryItemViewModel.cs" />
     <Compile Include="HistoryTab\HistoryTabViewModel.cs" />
     <Compile Include="HomeTab\HomeTabUserViewModel.cs" />

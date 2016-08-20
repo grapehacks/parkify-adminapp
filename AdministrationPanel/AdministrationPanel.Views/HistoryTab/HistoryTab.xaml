@@ -8,6 +8,35 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type historyTab:HistoryItemViewModel}" x:Key="HistoryItemTemplate">
+                <Expander Header="{Binding DrawDate}" FlowDirection="RightToLeft">
+                    <ListView ItemsSource="{Binding CardsCollection}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Card">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type historyTab:HistoryItemCardsViewModel}">
+                                            <TextBlock Text="{Binding Card}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Username" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type historyTab:HistoryItemCardsViewModel}"> 
+                                            <TextBlock Text="{Binding Username}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Expander>
+            </DataTemplate>
+
+        </Grid.Resources>
+        
         <ListView ItemsSource="{Binding HistoryCollection}" >
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -17,20 +46,10 @@
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Data losowania">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate DataType="{x:Type historyTab:HistoryItemViewModel}">
-                                <TextBlock Text="{Binding DrawDate}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
+                    <GridViewColumn Header="Data losowania" 
+                                    CellTemplate="{StaticResource HistoryItemTemplate}">
                     </GridViewColumn>
-                    <GridViewColumn Header="Szczegóły">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate DataType="{x:Type historyTab:HistoryItemViewModel}">
-                                <Button Command="{Binding DetailsCommandCommand}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    
                 </GridView>
             </ListView.View>
         </ListView>

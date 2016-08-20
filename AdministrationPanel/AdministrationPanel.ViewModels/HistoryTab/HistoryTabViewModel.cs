@@ -7,7 +7,15 @@ namespace AdministrationPanel.ViewModels.HistoryTab
         public HistoryTabViewModel()
         {
             HistoryCollection = new ObservableCollection<HistoryItemViewModel>();
-            HistoryCollection.Add(new HistoryItemViewModel() { DrawDate = "123213" });
+            HistoryCollection.Add(new HistoryItemViewModel()
+            {
+                DrawDate = "123213",
+                CardsCollection = new ObservableCollection<HistoryItemCardsViewModel>
+                {
+                     new HistoryItemCardsViewModel{Card = "asd", Username = "zzx"},
+                     new HistoryItemCardsViewModel{Card = "qwe", Username = "qwe"},
+                }
+            });
             HistoryCollection.Add(new HistoryItemViewModel() { DrawDate = "98797" });
         }
 

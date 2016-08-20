@@ -1,10 +1,24 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using GalaSoft.MvvmLight.Command;
 
 namespace AdministrationPanel.ViewModels.HistoryTab
 {
     public class HistoryItemViewModel : AdministrationPanelViewModelBase
     {
+        private ObservableCollection<HistoryItemCardsViewModel> _cardsCollection;
+
+        public ObservableCollection<HistoryItemCardsViewModel> CardsCollection
+        {
+            get { return _cardsCollection; }
+            set
+            {
+                if (Equals(value, _cardsCollection)) return;
+                _cardsCollection = value;
+                OnPropertyChanged(() => CardsCollection);
+            }
+        }
+
         private string _drawDate;
 
         public string DrawDate
@@ -17,22 +31,5 @@ namespace AdministrationPanel.ViewModels.HistoryTab
                 OnPropertyChanged(() => DrawDate);
             }
         }
-
-        #region DetailsCommand command
-        private RelayCommand _detailsCommand;
-
-        public RelayCommand DetailsCommandCommand
-        {
-            get
-            {
-                return _detailsCommand ?? (_detailsCommand = new RelayCommand(DetailsCommand));
-            }
-        }
-
-        private void DetailsCommand()
-        {
-            MessageBox.Show("DetailsCommand");
-        }
-        #endregion
     }
 }
