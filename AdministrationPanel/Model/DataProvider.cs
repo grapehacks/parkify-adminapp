@@ -52,5 +52,10 @@ namespace Model
 
             return tcs.Task;
         }
+
+        ~DataProvider()
+        {
+            
+        }
     }
 }

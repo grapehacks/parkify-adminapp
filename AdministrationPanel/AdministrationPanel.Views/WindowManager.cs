@@ -63,6 +63,7 @@ namespace AdministrationPanel.Views
         {
             _loginWindow.Hide();
             _mainWindow.Show();
+            _mainViewModel.UserListViewModel.Load();
         }
 
         public void ShowCalendar(ShowCalendarPickerMessage msg)
