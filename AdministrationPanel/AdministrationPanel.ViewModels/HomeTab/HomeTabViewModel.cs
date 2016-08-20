@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using GalaSoft.MvvmLight.CommandWpf;
 using Model;
@@ -15,29 +16,21 @@ namespace AdministrationPanel.ViewModels.HomeTab
             Init();
         }
 
-
-        private async void Init2()
+        private async void Init()
         {
+            _usersCollection = new ObservableCollection<HomeTabUserViewModel>();
             var usersList = await  _dataProvider.GetUsers();
             foreach (var user in usersList)
             {
                 _usersCollection.Add(new HomeTabUserViewModel(user));
             }
 
-            var cardsList = await _dataProvider.GetCards();
+            var cards = await _dataProvider.GetCards();
+            var list = cards.ToList();
+            _totalCards = list.Count.ToString();
+            _availibleCards = list.Count(x => x.active && !x.removed).ToString();
 
-
-            var drawsList = await _dataProvider.GetDraws();
-
-
-        }
-        private void Init()
-        {
-
-            AvailibleCards = "7";
             UpcomingDraw = "28-10-2016";
-            TotalCards = "10";
-
         }
 
         private ObservableCollection<HomeTabUserViewModel> _usersCollection;
