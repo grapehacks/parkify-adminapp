@@ -2,11 +2,11 @@
 {
     public class CardViewModel : AdministrationPanelViewModelBase
     {
-        private readonly string _name;
-        private readonly string _type;
-        private readonly bool _removed;
-		private readonly bool _active;
-		private readonly string _userName;
+        private string _name;
+        private string _type;
+        private bool _removed;
+		private bool _active;
+		private string _userName;
         private readonly ActionsViewModel _actionsViewModel;
 
         public CardViewModel(string name, string type, bool removed, bool active, string userName)
@@ -37,9 +37,10 @@
 		public bool Active
         {
             get { return _active; }
+			set { _active = value; }
         }
 		
-		public string userName
+		public string UserName
         {
             get { return _userName; }
         }

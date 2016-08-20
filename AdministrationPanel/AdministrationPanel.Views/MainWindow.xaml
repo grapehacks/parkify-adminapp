@@ -8,6 +8,7 @@
         xmlns:viewModels="clr-namespace:AdministrationPanel.ViewModels;assembly=AdministrationPanel.ViewModels"
         xmlns:homeTab="clr-namespace:AdministrationPanel.Views.HomeTab"
         xmlns:historyTab="clr-namespace:AdministrationPanel.Views.HistoryTab"
+        xmlns:cardsTab="clr-namespace:AdministrationPanel.Views.CardsTab"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance d:Type=viewModels:MainViewModel, IsDesignTimeCreatable=False}"
         Title="MainWindow" Height="750" Width="525">
@@ -37,8 +38,13 @@
             </TabItem>
 
             <TabItem Header="Parking Cards">
-                <ContentPresenter Content="not implemented">
-                </ContentPresenter>
+                <ContentControl Content="{Binding CardListViewModel}">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <cardsTab:CardsTab/>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
             </TabItem>
 
             <TabItem Header="History">
