@@ -53,7 +53,7 @@ namespace Model
 			_mRestClient.ExecuteAsync(request, (response, callback) =>
 			{
 				Log(response.Content);
-				action(response.ErrorMessage);
+				action(GetErrorString(response));
 			});
 		}
 	}

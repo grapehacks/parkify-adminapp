@@ -14,12 +14,12 @@ namespace AdministrationPanel.Views
         public MainWindow()
         {
             InitializeComponent();
-            /*
+            
             _model = new ParkifyModel("http://krk.grapeup.com:8080");
 
 			var cred = new Credentials();
-			cred.Email = "email@test.com";
-			cred.Password = "test_pass";
+			cred.email = "email@test.com";
+			cred.password = "test_pass";
 
 			_model.OnAuthenticationSucceed += model_OnAuthenticationSucceed;
 
@@ -33,7 +33,7 @@ namespace AdministrationPanel.Views
 				{
 					MessageBox.Show("Auth success");
 				}
-			});*/
+			});
         }
 
 		void model_OnAuthenticationSucceed(object sender, EventArgs e)
@@ -113,20 +113,20 @@ namespace AdministrationPanel.Views
 							{
 								MessageBox.Show("User removed");
 							}
-						}, userItem.Id);
+						}, userItem._id);
 					}
 				}
 			});
 
 			var a = new User();
-			a.Name = "Krol Lew";
-			a.Email = "krol@lew.pl";
-			a.Participate = UserParticipate.Yes;
-			a.Password = "lion";
-			a.Removed = false;
-			a.Type = UserType.Admin;
-			a.UnreadMsgCounter = 10;
-			a.Id = "dupa";
+			a.name = "Krol Lew";
+			a.email = "krol@lew.pl";
+			a.participate = UserParticipate.Yes;
+			a.password = "lion";
+			a.removed = false;
+			a.type = UserType.Admin;
+			a.unreadMsgCounter = 10;
+			a._id = "dupa";
 
 			_model.AddUser(a, (user, error) =>
 			{
