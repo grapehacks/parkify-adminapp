@@ -2,12 +2,16 @@
 using System.Windows;
 using GalaSoft.MvvmLight.CommandWpf;
 using Model.DataTypes;
+using GalaSoft.MvvmLight.Messaging;
+using AdministrationPanel.ViewModels.Messages;
 
 namespace AdministrationPanel.ViewModels.HomeTab
 {
     public class HomeTabViewModel : AdministrationPanelViewModelBase
     {
-        public HomeTabViewModel()
+        private readonly IMessenger _messenger;
+
+        public HomeTabViewModel(IMessenger messenger)
         {
             _usersCollection = new ObservableCollection<HomeTabUserViewModel>
             {
@@ -19,6 +23,8 @@ namespace AdministrationPanel.ViewModels.HomeTab
             AvailibleCards = "7";
             UpcomingDraw = "28-10-2016";
             TotalCards = "10";
+
+            _messenger = messenger;
         }
 
         private ObservableCollection<HomeTabUserViewModel> _usersCollection;
@@ -83,7 +89,8 @@ namespace AdministrationPanel.ViewModels.HomeTab
 
         private void ChangeDrawDate()
         {
-            MessageBox.Show("ChangeDrawDate");
+            _messenger.Send(new ShowCalendarPickerMessage());
+
         }
         #endregion
     }
