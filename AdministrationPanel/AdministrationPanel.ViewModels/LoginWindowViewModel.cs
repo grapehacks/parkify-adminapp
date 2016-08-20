@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using GalaSoft.MvvmLight.CommandWpf;
 using Model;
 using Model.DataTypes;
@@ -10,6 +9,7 @@ namespace AdministrationPanel.ViewModels
     {
         private readonly IDataProvider _dataProvider;
         private readonly RelayCommand _loginCommand;
+
         private string _email;
         private string _error;
         private string _password;
@@ -18,6 +18,11 @@ namespace AdministrationPanel.ViewModels
         {
             _dataProvider = dataProvider;
             _loginCommand = new RelayCommand(Login);
+        }
+
+        public RelayCommand LoginCommand
+        {
+            get { return _loginCommand; }
         }
 
         public string Error

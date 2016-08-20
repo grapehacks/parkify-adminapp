@@ -83,10 +83,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="HomeTab\ParticipantColorConverter.cs" />
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UsersTab\UsersTab.xaml.cs">
       <DependentUpon>UsersTab.xaml</DependentUpon>
     </Compile>
     <Page Include="HomeTab\HomeTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
