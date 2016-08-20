@@ -1,22 +1,27 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
+using Model;
 
 namespace AdministrationPanel.ViewModels.HistoryTab
 {
     public class HistoryTabViewModel : AdministrationPanelViewModelBase
     {
-        public HistoryTabViewModel()
+        private readonly IDataProvider _dataProvider;
+        public HistoryTabViewModel(IDataProvider dataProvider)
         {
-            HistoryCollection = new ObservableCollection<HistoryItemViewModel>();
-            HistoryCollection.Add(new HistoryItemViewModel()
+            _dataProvider = dataProvider;
+            Init();
+        }
+
+        private async void Init()
+        {
+            var draws = await _dataProvider.GetDraws();
+            var drawsList = draws.ToList();
+            _historyCollection = new ObservableCollection<HistoryItemViewModel>();
+            foreach (var draw in drawsList)
             {
-                DrawDate = "123213",
-                CardsCollection = new ObservableCollection<HistoryItemCardsViewModel>
-                {
-                     new HistoryItemCardsViewModel{Card = "asd", Username = "zzx"},
-                     new HistoryItemCardsViewModel{Card = "qwe", Username = "qwe"},
-                }
-            });
-            HistoryCollection.Add(new HistoryItemViewModel() { DrawDate = "98797" });
+                _historyCollection.Add(new HistoryItemViewModel(draw));
+            }
         }
 
 
