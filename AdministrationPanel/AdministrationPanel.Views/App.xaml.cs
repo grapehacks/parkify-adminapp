@@ -9,8 +9,8 @@ namespace AdministrationPanel.Views
         private Bootstrapper _bootstrapper;
 
         protected override void OnStartup(StartupEventArgs e)
-        { 
-            TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
+        {
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             base.OnStartup(e);
 
             _bootstrapper = new Bootstrapper();
@@ -19,9 +19,10 @@ namespace AdministrationPanel.Views
             manager.ShowLoginWindow();
         }
 
-        private void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("-ffuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+            e.SetObserved();
         }
     }
 }

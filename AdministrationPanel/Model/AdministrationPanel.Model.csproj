@@ -55,6 +55,7 @@
     <Compile Include="DataTypes\Error.cs" />
     <Compile Include="DataTypes\History.cs" />
     <Compile Include="DataTypes\Ping.cs" />
+    <Compile Include="DataTypes\PingUser.cs" />
     <Compile Include="DataTypes\UserParticipate.cs" />
     <Compile Include="DataTypes\UserType.cs" />
     <Compile Include="IDataProvider.cs" />

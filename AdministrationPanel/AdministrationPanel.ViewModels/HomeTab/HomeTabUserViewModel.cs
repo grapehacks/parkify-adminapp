@@ -4,6 +4,12 @@ namespace AdministrationPanel.ViewModels.HomeTab
 {
     public class HomeTabUserViewModel : AdministrationPanelViewModelBase
     {
+        public HomeTabUserViewModel(User user)
+        {
+            _name = user.name;
+            _userParticipate = user.participate;
+        }
+
         private string _name;
 
         public string Name
