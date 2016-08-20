@@ -21,6 +21,7 @@ namespace AdministrationPanel.Views
             containerBuilder.RegisterType<MainViewModel>();
             containerBuilder.RegisterType<MainWindow>();
             containerBuilder.RegisterType<ViewModels.UsersTab.ActionsViewModel>();
+            containerBuilder.RegisterType<ViewModels.CardsTab.ActionsViewModel>();
             containerBuilder.RegisterType<UserViewModel>();
 			containerBuilder.RegisterType<CardViewModel>();
             containerBuilder.RegisterType<HomeTabViewModel>();
