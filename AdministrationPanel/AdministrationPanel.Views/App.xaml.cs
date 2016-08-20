@@ -4,13 +4,15 @@ namespace AdministrationPanel.Views
 {
     public partial class App
     {
+        private Bootstrapper _bootstrapper;
+
         protected override void OnStartup(StartupEventArgs e)
         { 
             base.OnStartup(e);
 
-            var bootstrapper = new Bootstrapper();
-            bootstrapper.Bootstrap();
-            var manager = bootstrapper.GetWindowManager();
+            _bootstrapper = new Bootstrapper();
+            _bootstrapper.Bootstrap();
+            var manager = _bootstrapper.GetWindowManager();
             manager.ShowLoginWindow();
         }
     }
