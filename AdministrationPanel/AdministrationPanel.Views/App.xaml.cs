@@ -10,8 +10,8 @@ namespace AdministrationPanel.Views
 
             var bootstrapper = new Bootstrapper();
             bootstrapper.Bootstrap();
-            var window = bootstrapper.GetMainWindow();
-            window.Show();
+            var manager = bootstrapper.GetWindowManager();
+            manager.ShowLoginWindow();
         }
     }
 }

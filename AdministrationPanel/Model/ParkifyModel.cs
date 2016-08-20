@@ -20,9 +20,9 @@ namespace Model
 
 		///////////////////////////////////////////////////////////////////////////
 
-		public ParkifyModel(string serverAddress)
+		public ParkifyModel()
 		{
-			_mRestClient = new RestClient(serverAddress);
+			_mRestClient = new RestClient("http://krk.grapeup.com:8080");
 		}
 
 		///////////////////////////////////////////////////////////////////////////

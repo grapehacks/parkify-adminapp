@@ -89,6 +89,7 @@
     <Compile Include="UsersTab\UsersTab.xaml.cs">
       <DependentUpon>UsersTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowManager.cs" />
     <Page Include="HomeTab\HomeTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

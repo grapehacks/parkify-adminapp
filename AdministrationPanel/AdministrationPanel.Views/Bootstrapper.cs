@@ -3,6 +3,7 @@ using AdministrationPanel.ViewModels;
 using AdministrationPanel.ViewModels.HomeTab;
 using AdministrationPanel.ViewModels.UsersTab;
 using Autofac;
+using Model;
 
 namespace AdministrationPanel.Views
 {
@@ -18,17 +19,18 @@ namespace AdministrationPanel.Views
             containerBuilder.RegisterType<MainWindow>();
             containerBuilder.RegisterType<UserListViewModel>();
             containerBuilder.RegisterType<HomeTabViewModel>();
+            containerBuilder.RegisterType<LoginWindow>();
+            containerBuilder.RegisterType<LoginWindowViewModel>();
+            containerBuilder.RegisterType<WindowManager>();
+            containerBuilder.RegisterType<DataProvider>().As<IDataProvider>();
+            containerBuilder.RegisterType<ParkifyModel>().As<IParkifyModel>();
 
             Container = containerBuilder.Build();
         }
 
-        public Window GetMainWindow()
+        public WindowManager GetWindowManager()
         {
-            var viewModel = Container.Resolve<MainViewModel>();
-            var window = Container.Resolve<MainWindow>();
-
-            window.DataContext = viewModel;
-            return window;
+            return Container.Resolve<WindowManager>();
         }
     }
 }
