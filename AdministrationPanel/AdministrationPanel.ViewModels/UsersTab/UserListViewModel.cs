@@ -47,7 +47,8 @@ namespace AdministrationPanel.ViewModels.UsersTab
 
         private static string GetCardForUser(IEnumerable<Card> cards, string userId)
         {
-            var card = cards.FirstOrDefault(c => c.user._id == userId);
+            var cardWithUser = cards.Where(c => c.user != null);
+            var card = cardWithUser.FirstOrDefault(c => c.user._id == userId);
             return card == null
                 ? string.Empty
                 : card.name;
