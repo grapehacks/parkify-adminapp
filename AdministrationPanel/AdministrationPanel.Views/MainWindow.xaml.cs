@@ -7,38 +7,39 @@ using Model.DataTypes;
 
 namespace AdministrationPanel.Views
 {
-    public partial class MainWindow
-    {
+	public partial class MainWindow
+	{
 		private ParkifyModel _model;
 
         public MainWindow()
         {
             InitializeComponent();
             
-   //         _model = new ParkifyModel();
+			/*
+			_model = new ParkifyModel();
+			var cred = new Credentials();
+			cred.email = "email@test.com";
+			cred.password = "test_pass";
 
-			//var cred = new Credentials();
-			//cred.email = "email@test.com";
-			//cred.password = "test_pass";
+			_model.Authenticate(cred, (error) =>
+			{
+				if (error != null)
+				{
+					MessageBox.Show(error.errorMessage);
+				}
+				else
+				{
+					MessageBox.Show("Auth success");
 
-			//_model.OnAuthenticationSucceed += model_OnAuthenticationSucceed;
+					//AuthenticationSucceed();
+				}
+			});
+			*/
+		}
 
-			//_model.Authenticate(cred, (error) =>
-			//{
-			//	if (error != null)
-			//	{
-			//		MessageBox.Show(error.errorMessage);
-			//	}
-			//	else
-			//	{
-			//		MessageBox.Show("Auth success");
-			//	}
-			//});
-        }
-
-		void model_OnAuthenticationSucceed(object sender, EventArgs e)
+		void AuthenticationSucceed()
 		{
-			_model.SendPing((ping, error) =>
+			_model.PingForDate((ping, error) =>
 			{
 				if (error != null)
 				{
@@ -152,5 +153,5 @@ namespace AdministrationPanel.Views
 				}
 			});
 		}
-    }
+	}
 }

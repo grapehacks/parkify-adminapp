@@ -12,9 +12,7 @@ namespace Model
 		private const string PathGetCards = @"api/cards";
 		private const string PathGetDraw = @"api/draw";
 		private const string PathAuth = @"/authenticate";
-
-		public event EventHandler OnAuthenticationSucceed;
-		public event EventHandler OnAuthenticationFailed;
+		private const string PathDrawDate = @"/draw/draw-date";
 
 		string _myToken;
 
@@ -53,12 +51,10 @@ namespace Model
 						if (!string.IsNullOrEmpty(tokenResponse.token))
 						{
 							action(null);
-							OnAuthenticationSucceed(this, EventArgs.Empty);
 						}
 						else
 						{
 							action(new Error(ServerError.AuthenticationFailed, GetErrorString(response)));
-							OnAuthenticationFailed(this, EventArgs.Empty);
 						}
 					}
 					else
@@ -71,7 +67,7 @@ namespace Model
 
 		///////////////////////////////////////////////////////////////////////////
 
-		public void SendPing(Action<Ping, string> action)
+		public void PingForDate(Action<Ping, string> action)
 		{
 			var request = new RestRequest(PathPing);
 			_mRestClient.ExecuteAsync<Ping>(request, (response, callback) => {
