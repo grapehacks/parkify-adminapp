@@ -1,21 +1,23 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Model;
+using Model.DataTypes;
 
 namespace AdministrationPanel.ViewModels.CardsTab
 {
     public class CardListViewModel : AdministrationPanelViewModelBase
     {
+		private readonly IDataProvider _dataProvider;
+		private readonly CardViewModel.Factory _cardViewModelFactory;
         private ObservableCollection<CardViewModel> _cardList;
 
-        public CardListViewModel()
+		public CardListViewModel(IDataProvider dataProvider, CardViewModel.Factory factory)
         {
-            _cardList = new ObservableCollection<CardViewModel>()
-            {
-                new CardViewModel("1-A", "", false, true, "Tom1"),
-                new CardViewModel("1-B", "", false, true, "Tom2"),
-                new CardViewModel("1-C", "", false, true, "Tom3"),
-                new CardViewModel("1-D", "", false, true, "Tom4"),
-                new CardViewModel("1-E", "", false, true, "Tom5"),
-            };
+			_dataProvider = dataProvider;
+			_cardViewModelFactory = factory;
+			_cardList = new ObservableCollection<CardViewModel>();
         }
 
         public ObservableCollection<CardViewModel> CardList
@@ -28,5 +30,21 @@ namespace AdministrationPanel.ViewModels.CardsTab
                 OnPropertyChanged(() => CardList);
             }
         }
+
+		public async void Load()
+		{
+			var cards = await _dataProvider.GetCards();
+			var cardList = cards == null ? new List<Card>() : cards.ToList();
+
+			var cardViewModels = cardList
+				.Select(card => _cardViewModelFactory(
+					card.name,
+					card.type,
+					card.removed,
+					card.active,
+					card.user));
+
+			CardList = new ObservableCollection<CardViewModel>(cardViewModels);
+		}
     }
 }

@@ -22,7 +22,7 @@ namespace AdministrationPanel.Views
             containerBuilder.RegisterType<MainWindow>();
             containerBuilder.RegisterType<ViewModels.UsersTab.ActionsViewModel>();
             containerBuilder.RegisterType<UserViewModel>();
-			containerBuilder.RegisterType<CardListViewModel>();
+			containerBuilder.RegisterType<CardViewModel>();
             containerBuilder.RegisterType<HomeTabViewModel>();
             containerBuilder.RegisterType<HistoryTabViewModel>();
             containerBuilder.RegisterType<HistoryItemViewModel>();
