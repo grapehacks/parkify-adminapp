@@ -95,6 +95,9 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserAddEditWindow.xaml.cs">
+      <DependentUpon>UserAddEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UsersTab\UsersTab.xaml.cs">
       <DependentUpon>UsersTab.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserAddEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UsersTab\UsersTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -47,6 +47,7 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
@@ -83,11 +84,13 @@
     <Compile Include="Messages\LoggedInMessage.cs" />
     <Compile Include="Messages\LoggedOutMessage.cs" />
     <Compile Include="Messages\ShowCalendarPickerMessage.cs" />
+    <Compile Include="Messages\ShowUserAddEditMessage.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsersTab\ActionsViewModel.cs" />
     <Compile Include="UsersTab\UserListViewModel.cs" />
     <Compile Include="UsersTab\UserViewModel.cs" />
+    <Compile Include="UsersTab\UserViewModelAddEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -3,15 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AdministrationPanel.Views"
         xmlns:usersTab="clr-namespace:AdministrationPanel.ViewModels.UsersTab;assembly=AdministrationPanel.ViewModels"
         mc:Ignorable="d"
                 d:DataContext="{d:DesignInstance d:Type=usersTab:UserViewModelAddEdit, IsDesignTimeCreatable=False}"
         Title="UserAddEditWindow" Height="300" Width="300">
-    <WrapPanel>
+    <StackPanel>
+        <TextBlock Text="ID:"/>
+        <TextBlock IsEnabled="{Binding IsAddMode}" Text="{Binding Id}"/>
+
+        <TextBlock Text="Email:"/>
+        <TextBox Text="{Binding Email}"/>
+
         <TextBlock Text="Username:"/>
-        <TextBox />
-        <Button Content="Dodaj"/>
-        <Button Content="Anuluj"/>
-    </WrapPanel>
+        <TextBox Text="{Binding Name}"/>
+
+        <TextBlock Text="Password:"/>
+        <TextBox Text="{Binding Password}"/>
+
+        <TextBlock Text="Removed:"/>
+        <CheckBox IsChecked="{Binding Removed}"/>
+
+        <TextBlock Text="UnreadMsgCounter:"/>
+        <TextBlock IsEnabled="{Binding IsEditMode}" Text="{Binding UnreadMsgCounter}"/>
+
+        <TextBlock Text="RememberLastChoice:"/>
+        <CheckBox IsChecked="{Binding RememberLastChoice}"/>
+
+        <TextBlock Text="Participate:"/>
+        <CheckBox IsChecked="{Binding Participate}"/>
+
+        <TextBlock Text="Type:"/>
+        <CheckBox IsChecked="{Binding Type}"/>
+
+        <Button Content="{Binding SaveButtonLabel}" Command="{Binding SaveCommand}"/>
+        <Button Content="Anuluj" Command="{Binding CancelCommand}"/>
+    </StackPanel>
 </Window>

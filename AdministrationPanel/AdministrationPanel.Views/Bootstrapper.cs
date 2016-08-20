@@ -41,6 +41,8 @@ namespace AdministrationPanel.Views
             containerBuilder.RegisterType<DataProvider>().As<IDataProvider>().SingleInstance();
             containerBuilder.RegisterType<ParkifyModel>().As<IParkifyModel>().SingleInstance();
             containerBuilder.RegisterType<Messenger>().As<IMessenger>().SingleInstance();
+            containerBuilder.RegisterType<UserAddEditWindow>();
+            containerBuilder.RegisterType<UserViewModelAddEdit>();
 
             Container = containerBuilder.Build();
         }
