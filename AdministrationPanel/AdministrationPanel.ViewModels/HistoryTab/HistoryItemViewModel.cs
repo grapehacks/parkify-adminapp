@@ -1,44 +1,24 @@
-﻿using System.Collections.ObjectModel;
-using Model.DataTypes;
-
-namespace AdministrationPanel.ViewModels.HistoryTab
+﻿namespace AdministrationPanel.ViewModels.HistoryTab
 {
     public class HistoryItemViewModel : AdministrationPanelViewModelBase
     {
-        public HistoryItemViewModel(Draw draw)
+        private readonly string _card;
+        private readonly string _username;
+
+        public HistoryItemViewModel(string card, string username)
         {
-            _drawDate = draw.Date;
-            _cardsCollection = new ObservableCollection<HistoryItemCardsViewModel>
-            {
-                new HistoryItemCardsViewModel {Card = "asd", Username = "zzx"},
-                new HistoryItemCardsViewModel {Card = "qwe", Username = "qwe"},
-            };
+            _card = card;
+            _username = username;
         }
 
-        private ObservableCollection<HistoryItemCardsViewModel> _cardsCollection;
-
-        public ObservableCollection<HistoryItemCardsViewModel> CardsCollection
+        public string Card
         {
-            get { return _cardsCollection; }
-            set
-            {
-                if (Equals(value, _cardsCollection)) return;
-                _cardsCollection = value;
-                OnPropertyChanged(() => CardsCollection);
-            }
+            get { return _card; }
         }
 
-        private string _drawDate;
-
-        public string DrawDate
+        public string Username
         {
-            get { return _drawDate; }
-            set
-            {
-                if (value == _drawDate) return;
-                _drawDate = value;
-                OnPropertyChanged(() => DrawDate);
-            }
+            get { return _username; }
         }
     }
 }

@@ -72,8 +72,8 @@
     <Compile Include="CardTab\CardListViewModel.cs" />
     <Compile Include="CardTab\CardViewModel.cs" />
     <Compile Include="CalendarWindowViewModel.cs" />
-    <Compile Include="HistoryTab\HistoryItemCardsViewModel.cs" />
     <Compile Include="HistoryTab\HistoryItemViewModel.cs" />
+    <Compile Include="HistoryTab\HistoryGroupViewModel.cs" />
     <Compile Include="HistoryTab\HistoryTabViewModel.cs" />
     <Compile Include="HomeTab\HomeTabUserViewModel.cs" />
     <Compile Include="HomeTab\HomeTabViewModel.cs" />
