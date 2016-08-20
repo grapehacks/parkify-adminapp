@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AdministrationPanel.ViewModels.Messages;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Model;
 using Model.DataTypes;
 
@@ -12,14 +15,15 @@ namespace AdministrationPanel.ViewModels.UsersTab
         private readonly IDataProvider _dataProvider;
         private readonly UserViewModel.Factory _userViewModelFactory;
         private ObservableCollection<UserViewModel> _userList;
+        private readonly IMessenger _messenger;
 
-        
 
-        public UserListViewModel(IDataProvider dataProvider, UserViewModel.Factory factory)
+        public UserListViewModel(IDataProvider dataProvider, UserViewModel.Factory factory, IMessenger messenger)
         {
             _dataProvider = dataProvider;
             _userViewModelFactory = factory;
             _userList = new ObservableCollection<UserViewModel>();
+            _messenger = messenger;
         }
 
         public ObservableCollection<UserViewModel> UserList
@@ -43,7 +47,7 @@ namespace AdministrationPanel.ViewModels.UsersTab
 
             var userViewModels = userList
                 .Select(user => _userViewModelFactory(
-                    user._id,
+                    user,
                     GetCardForUser(cardList, user._id),
                     user.name));
 
@@ -58,5 +62,23 @@ namespace AdministrationPanel.ViewModels.UsersTab
 			//	: card.name;
 			return "";
         }
+
+        #region AddUser command
+        private RelayCommand _addUser;
+
+        public RelayCommand AddUserCommand
+        {
+            get
+            {
+                return _addUser ?? (_addUser = new RelayCommand(AddUser));
+            }
+        }
+
+        private void AddUser()
+        {
+            _messenger.Send(new ShowUserAddEditMessage());
+        }
+        #endregion
     }
+
 }

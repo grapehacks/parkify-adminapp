@@ -15,6 +15,7 @@
 
         <Button Name="PartAddUserButton"
                 Grid.Row="0"
+                Command="{Binding AddUserCommand}"
                 Content="Add user +"
                 Margin="20"
                 Width="100"

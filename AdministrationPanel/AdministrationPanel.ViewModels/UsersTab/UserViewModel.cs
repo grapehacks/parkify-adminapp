@@ -1,22 +1,23 @@
 ﻿using System;
+using Model.DataTypes;
 
 namespace AdministrationPanel.ViewModels.UsersTab
 {
     public class UserViewModel : AdministrationPanelViewModelBase
     {
-        private readonly string _id;
+        private readonly User _user;
         private readonly string _card;
         private readonly string _name;
         private readonly ActionsViewModel _actionsViewModel;
 
-        public delegate UserViewModel Factory(string id, string card, string name);
+        public delegate UserViewModel Factory(User user, string card, string name);
 
-        public UserViewModel(string id, string card, string name, Func<string, ActionsViewModel> actionsFactory)
+        public UserViewModel(User user, string card, string name, Func<User, ActionsViewModel> actionsFactory)
         {
-            _id = id;
+            _user = user;
             _card = card;
             _name = name;
-            _actionsViewModel = actionsFactory(id);
+            _actionsViewModel = actionsFactory(user);
         }
 
         public string Card

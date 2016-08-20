@@ -1,22 +1,26 @@
-using System.Windows;
+using AdministrationPanel.ViewModels.Messages;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using Model;
+using Model.DataTypes;
 
 namespace AdministrationPanel.ViewModels.UsersTab
 {
     public class ActionsViewModel
     {
-        private readonly string _id;
+        private readonly User _user;
         private readonly RelayCommand _editCommand;
         private readonly RelayCommand _removeCommand;
         private readonly IDataProvider _dataProvider;
+        private readonly IMessenger _messenger;
 
-        public ActionsViewModel(string id, IDataProvider dataProvider)
+        public ActionsViewModel(User user, IDataProvider dataProvider, IMessenger messenger)
         {
-            _id = id;
+            _user = user;
             _dataProvider = dataProvider;
             _editCommand = new RelayCommand(EditUser);
             _removeCommand = new RelayCommand(RemoveUser);
+            _messenger = messenger;
         }
 
         public RelayCommand EditCommand
@@ -31,12 +35,12 @@ namespace AdministrationPanel.ViewModels.UsersTab
 
         private void EditUser()
         {
-            MessageBox.Show(string.Format("Call EditUser({0})", _id));
+            _messenger.Send(new ShowUserAddEditMessage() {User = _user });
         }
 
         private async void RemoveUser()
         {
-            var result = await _dataProvider.RemoveUser(_id);
+            var result = await _dataProvider.RemoveUser(_user._id);
         }
     }
 }
