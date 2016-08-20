@@ -9,7 +9,7 @@ namespace AdministrationPanel.Views
 {
 	public partial class MainWindow
 	{
-		private ParkifyModel _model;
+		//private ParkifyModel _model;
 
         public MainWindow()
         {
@@ -37,121 +37,121 @@ namespace AdministrationPanel.Views
 			*/
 		}
 
-		void AuthenticationSucceed()
-		{
-			_model.PingForDate((ping, error) =>
-			{
-				if (error != null)
-				{
-					MessageBox.Show(error);
-				}
-				else
-				{
-					MessageBox.Show(ping.date.ToString());
-				}
-			});
+		//void AuthenticationSucceed()
+		//{
+		//	_model.PingForDate((ping, error) =>
+		//	{
+		//		if (error != null)
+		//		{
+		//			MessageBox.Show(error);
+		//		}
+		//		else
+		//		{
+		//			MessageBox.Show(ping.date.ToString());
+		//		}
+		//	});
 
-			_model.GetCards((cards, error) =>
-			{
-				if (error != null)
-				{
-					MessageBox.Show(error);
-				}
-				else
-				{
-					MessageBox.Show(String.Join(", ", cards));
-				}
-			});
+		//	_model.GetCards((cards, error) =>
+		//	{
+		//		if (error != null)
+		//		{
+		//			MessageBox.Show(error);
+		//		}
+		//		else
+		//		{
+		//			MessageBox.Show(String.Join(", ", cards));
+		//		}
+		//	});
 
-			_model.GetDraws((draws, error) =>
-			{
-				if (error != null)
-				{
-					MessageBox.Show(error);
-				}
-				else
-				{
-					MessageBox.Show(String.Join(", ", draws));
-				}
-			});
+		//	_model.GetDraws((draws, error) =>
+		//	{
+		//		if (error != null)
+		//		{
+		//			MessageBox.Show(error);
+		//		}
+		//		else
+		//		{
+		//			MessageBox.Show(String.Join(", ", draws));
+		//		}
+		//	});
 
-			_model.GetDraws((draws, error) =>
-			{
-				if (error != null)
-				{
-					MessageBox.Show(error);
-				}
-				else
-				{
-					MessageBox.Show(String.Join(", ", draws));
-				}
-			}, 1);
+		//	_model.GetDraws((draws, error) =>
+		//	{
+		//		if (error != null)
+		//		{
+		//			MessageBox.Show(error);
+		//		}
+		//		else
+		//		{
+		//			MessageBox.Show(String.Join(", ", draws));
+		//		}
+		//	}, 1);
 
-			IEnumerable<User> Users;
-			_model.GetUsers((users, error) =>
-			{
-				if (error != null)
-				{
-					MessageBox.Show(error);
-				}
-				else
-				{
-					MessageBox.Show(String.Join(", ", users));
-					Users = users;
-					var removeUser = false;
+		//	IEnumerable<User> Users;
+		//	_model.GetUsers((users, error) =>
+		//	{
+		//		if (error != null)
+		//		{
+		//			MessageBox.Show(error);
+		//		}
+		//		else
+		//		{
+		//			MessageBox.Show(String.Join(", ", users));
+		//			Users = users;
+		//			var removeUser = false;
 
-					if (removeUser)
-					{
-						var userItem = users.ElementAt(2);
+		//			if (removeUser)
+		//			{
+		//				var userItem = users.ElementAt(2);
 
-						_model.RemoveUser((error2) =>
-						{
-							if (error != null)
-							{
-								MessageBox.Show(error2);
-							}
-							else
-							{
-								MessageBox.Show("User removed");
-							}
-						}, userItem._id);
-					}
-				}
-			});
+		//				_model.RemoveUser((error2) =>
+		//				{
+		//					if (error != null)
+		//					{
+		//						MessageBox.Show(error2);
+		//					}
+		//					else
+		//					{
+		//						MessageBox.Show("User removed");
+		//					}
+		//				}, userItem._id);
+		//			}
+		//		}
+		//	});
 
-			var a = new User();
-			a.name = "Krol Lew";
-			a.email = "krol@lew.pl";
-			a.participate = UserParticipate.Yes;
-			a.password = "lion";
-			a.removed = false;
-			a.type = UserType.Admin;
-			a.unreadMsgCounter = 10;
-			a._id = "dupa";
+		//	var a = new User();
+		//	a.name = "Krol Lew";
+		//	a.email = "krol@lew.pl";
+		//	a.participate = UserParticipate.Yes;
+		//	a.password = "lion";
+		//	a.removed = false;
+		//	a.type = UserType.Admin;
+		//	a.unreadMsgCounter = 10;
+		//	a._id = "dupa";
 
-			_model.AddUser(a, (user, error) =>
-			{
-				if (error != null)
-				{
-					MessageBox.Show(error);
-				}
-				else
-				{
-					MessageBox.Show(user.ToString());
-				}
-			});
+		//	_model.AddUser(a, (user, error) =>
+		//	{
+		//		if (error != null)
+		//		{
+		//			MessageBox.Show(error);
+		//		}
+		//		else
+		//		{
+		//			MessageBox.Show(user.ToString());
+		//		}
+		//	});
 
-			_model.GetUser("dupa", (user, error) =>
-			{
-				if (error != null)
-				{
-					MessageBox.Show(error);
-				}
-				else
-				{
-					MessageBox.Show(user.ToString());
-				}
-			});
-		}
+		//	_model.GetUser("dupa", (user, error) =>
+		//	{
+		//		if (error != null)
+		//		{
+		//			MessageBox.Show(error);
+		//		}
+		//		else
+		//		{
+		//			MessageBox.Show(user.ToString());
+		//		}
+		//	});
+		//}
 	}
 }
