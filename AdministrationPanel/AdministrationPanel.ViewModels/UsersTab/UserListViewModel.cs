@@ -1,21 +1,20 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Model;
+using Model.DataTypes;
 
 namespace AdministrationPanel.ViewModels.UsersTab
 {
     public class UserListViewModel : AdministrationPanelViewModelBase
     {
+        private readonly IDataProvider _dataProvider;
         private ObservableCollection<UserViewModel> _userList;
 
-        public UserListViewModel()
+        public UserListViewModel(IDataProvider dataProvider)
         {
-            _userList = new ObservableCollection<UserViewModel>()
-            {
-                new UserViewModel("1", "1-A", "Jan Kowalski"),
-                new UserViewModel("2", "1-B", "Jan Kowalski"),
-                new UserViewModel("3", "1-C", "Jan Kowalski"),
-                new UserViewModel("4", "1-D", "Jan Kowalski"),
-                new UserViewModel("5", "1-E", "Jan Kowalski"),
-            };
+            _dataProvider = dataProvider;
+            _userList = new ObservableCollection<UserViewModel>();
         }
 
         public ObservableCollection<UserViewModel> UserList
@@ -27,6 +26,31 @@ namespace AdministrationPanel.ViewModels.UsersTab
                 _userList = value;
                 OnPropertyChanged(() => UserList);
             }
+        }
+
+        public async void Load()
+        {
+            var users = await _dataProvider.GetUsers();
+            var cards = await _dataProvider.GetCards();
+
+            var userList = users == null ? new List<User>() : users.ToList();
+            var cardList = cards == null ? new List<Card>() : cards.ToList();
+
+            var userViewModels = userList
+                .Select(user => new UserViewModel(
+                    user._id,
+                    GetCardForUser(cardList, user._id),
+                    user.name));
+
+            UserList = new ObservableCollection<UserViewModel>(userViewModels);
+        }
+
+        private static string GetCardForUser(IEnumerable<Card> cards, string userId)
+        {
+            var card = cards.FirstOrDefault(c => c.user._id == userId);
+            return card == null
+                ? string.Empty
+                : card.name;
         }
     }
 }

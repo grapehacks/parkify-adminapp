@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace AdministrationPanel.Views
 {
@@ -8,12 +10,18 @@ namespace AdministrationPanel.Views
 
         protected override void OnStartup(StartupEventArgs e)
         { 
+            TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
             base.OnStartup(e);
 
             _bootstrapper = new Bootstrapper();
             _bootstrapper.Bootstrap();
             var manager = _bootstrapper.GetWindowManager();
             manager.ShowLoginWindow();
+        }
+
+        private void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
+        {
+            throw new NotImplementedException();
         }
     }
 }
