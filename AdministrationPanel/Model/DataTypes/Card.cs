@@ -3,19 +3,19 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Card
     {
-        public string Name { get; set; }
+        public string name { get; set; }
 
-        public string Type { get; set; }
+        public string type { get; set; }
 
-        public bool Removed { get; set; }
+        public bool removed { get; set; }
 
-        public bool Active { get; set; }
+        public bool active { get; set; }
 
-        public User User { get; set; }
+        public User user { get; set; }
 
         public override string ToString()
         {
-            return Name + ": " + Type.ToString() + " " + (User != null ? User.Name : "[NO USER]");
+            return name + ": " + type.ToString() + " " + (user != null ? user.name : "[NO USER]");
         }
     }
 }
