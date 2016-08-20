@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Data;
 using GalaSoft.MvvmLight.CommandWpf;
 using Model;
 using Model.DataTypes;
@@ -13,40 +11,40 @@ namespace AdministrationPanel.ViewModels.HomeTab
 {
     public class HomeTabViewModel : AdministrationPanelViewModelBase
     {
+<<<<<<< HEAD
         private readonly IMessenger _messenger;
-        private readonly IDataProvider _dataProvider;
 
-        public HomeTabViewModel(IDataProvider dataProvider, IMessenger messenger)
+        public HomeTabViewModel(IMessenger messenger)
+=======
+        private readonly IDataProvider _dataProvider;
+        public HomeTabViewModel(IDataProvider dataProvider)
+>>>>>>> f5acf1f81f4b186c0d6135471b18e03e6959ff75
         {
             _dataProvider = dataProvider;
-            _messenger = messenger;
             Init();
         }
 
         private async void Init()
         {
-            var usersList = await _dataProvider.GetUsers();
-            if (usersList != null)
+            _usersCollection = new ObservableCollection<HomeTabUserViewModel>();
+            var usersList = await  _dataProvider.GetUsers();
+            foreach (var user in usersList)
             {
-                _usersCollection = new ObservableCollection<HomeTabUserViewModel>();
-                foreach (var user in usersList)
-                {
-                    _usersCollection.Add(new HomeTabUserViewModel(user));
-                }
-
-                var view = CollectionViewSource.GetDefaultView(_usersCollection) as CollectionView;
-                view.SortDescriptions.Add(new SortDescription("UserParticipate", ListSortDirection.Ascending));
+                _usersCollection.Add(new HomeTabUserViewModel(user));
             }
 
             var cards = await _dataProvider.GetCards();
-            if (cards != null)
-            {
-                var list = cards.ToList();
-                _totalCards = list.Count.ToString();
-                _availibleCards = list.Count(x => x.active && !x.removed).ToString();
-            }
+            var list = cards.ToList();
+            _totalCards = list.Count.ToString();
+            _availibleCards = list.Count(x => x.active && !x.removed).ToString();
 
             UpcomingDraw = "28-10-2016";
+<<<<<<< HEAD
+            TotalCards = "10";
+
+            _messenger = messenger;
+=======
+>>>>>>> f5acf1f81f4b186c0d6135471b18e03e6959ff75
         }
 
         private ObservableCollection<HomeTabUserViewModel> _usersCollection;

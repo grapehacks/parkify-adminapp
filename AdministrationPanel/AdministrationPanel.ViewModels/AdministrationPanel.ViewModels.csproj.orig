@@ -64,14 +64,16 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardTab\ActionsViewModel.cs" />
     <Compile Include="AdministrationPanelViewModelBase.cs" />
+<<<<<<< HEAD
+    <Compile Include="CalendarWindowViewModel.cs" />
+=======
     <Compile Include="CardTab\CardListViewModel.cs" />
     <Compile Include="CardTab\CardViewModel.cs" />
-    <Compile Include="CalendarWindowViewModel.cs" />
+>>>>>>> f5acf1f81f4b186c0d6135471b18e03e6959ff75
     <Compile Include="HistoryTab\HistoryItemCardsViewModel.cs" />
     <Compile Include="HistoryTab\HistoryItemViewModel.cs" />
     <Compile Include="HistoryTab\HistoryTabViewModel.cs" />

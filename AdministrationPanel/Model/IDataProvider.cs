@@ -6,7 +6,7 @@ namespace Model
 {
     public interface IDataProvider
     {
-        Task<bool> Authenticate(Credentials credential);
+        Task<Error> Authenticate(Credentials credential);
         Task<IEnumerable<User>> GetUsers();
         Task<IEnumerable<Card>> GetCards();
         Task<IEnumerable<Draw>> GetDraws();

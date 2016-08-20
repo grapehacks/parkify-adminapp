@@ -72,7 +72,7 @@ namespace AdministrationPanel.ViewModels
 
             var result = await _dataProvider.Authenticate(credential);
 
-            if (result)
+            if (result == null)
             {
                 _messenger.Send(new LoggedInMessage());
             }
@@ -80,7 +80,9 @@ namespace AdministrationPanel.ViewModels
             {
                 Email = string.Empty;
                 Password = string.Empty;
-                Error = "Login failed";
+                Error = string.IsNullOrWhiteSpace(result.errorMessage) 
+                    ? result.errorReason.ToString() 
+                    : result.errorMessage;
             }
         }
     }
