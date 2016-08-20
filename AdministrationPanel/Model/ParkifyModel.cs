@@ -70,7 +70,22 @@ namespace Model
 		public void PingForDate(Action<Ping, string> action)
 		{
 			var request = new RestRequest(PathPing);
-			_mRestClient.ExecuteAsync<Ping>(request, (response, callback) => {
+			_mRestClient.ExecuteAsync<Ping>(request, (response, callback) =>
+			{
+				Log(response.Content);
+				action(response.Data, GetErrorString(response));
+			});
+		}
+
+		///////////////////////////////////////////////////////////////////////////
+
+		public void PingForUser(Action<PingUser, string> action)
+		{
+			var request = new RestRequest(PathPing);
+			request.RequestFormat = RestSharp.DataFormat.Json;
+			request.AddHeader("x-access-token", _myToken);
+			_mRestClient.ExecuteAsync<PingUser>(request, (response, callback) =>
+			{
 				Log(response.Content);
 				action(response.Data, GetErrorString(response));
 			});
