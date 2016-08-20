@@ -6,58 +6,24 @@ using Model.DataTypes;
 
 namespace AdministrationPanel.ViewModels.HistoryTab
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class HistoryTabViewModel : AdministrationPanelViewModelBase
     {
         private readonly IDataProvider _dataProvider;
-        public HistoryTabViewModel(/*IDataProvider dataProvider*/)
+        public HistoryTabViewModel(IDataProvider dataProvider)
         {
-            //_dataProvider = dataProvider;
-            //Init();
-
-            var drawList = new List<Draw>
-            {
-                new Draw
-                {
-                    card = new Card {name = "1-A"},
-                    Date = "666",
-                    winner = new User {name = "Jan Kowalksi"}
-                },
-                new Draw
-                {
-                    card = new Card {name = "1-A"},
-                    Date = "777",
-                    winner = new User {name = "Jan Kowalksi"}
-                },
-                new Draw
-                {
-                    card = new Card {name = "1-A"},
-                    Date = "666",
-                    winner = new User {name = "Jan Kowalksi"}
-                },
-                new Draw
-                {
-                    card = new Card {name = "1-A"},
-                    Date = "777",
-                    winner = new User {name = "Jan Kowalksi"}
-                },
-            };
-
-            var groups = drawList
-                .GroupBy(d => d.Date)
-                .Select(g => new HistoryGroupViewModel(g));
-
-            HistoryCollection = new ObservableCollection<HistoryGroupViewModel>(groups);
+            _dataProvider = dataProvider;
         }
 
-        private async void Init()
+        public async void Load()
         {
-            //var draws = await _dataProvider.GetDraws();
-            //var drawsList = draws.ToList();
-            //_historyCollection = new ObservableCollection<HistoryGroupViewModel>();
-            //foreach (var draw in drawsList)
-            //{
-            //    _historyCollection.Add(new HistoryGroupViewModel(draw));
-            //}
+            var draws = await _dataProvider.GetDraws();
+            var drawList = draws == null ? new List<Draw>() : draws.ToList();
+
+            var groups1 = drawList.GroupBy(d => d.Date).ToList();
+            var groups2 =groups1.Select(g => new HistoryGroupViewModel(g)).ToList();
+
+            HistoryCollection = new ObservableCollection<HistoryGroupViewModel>(groups2);
         }
 
 

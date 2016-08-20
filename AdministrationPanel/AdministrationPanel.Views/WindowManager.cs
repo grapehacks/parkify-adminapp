@@ -64,6 +64,7 @@ namespace AdministrationPanel.Views
             _loginWindow.Hide();
             _mainWindow.Show();
             _mainViewModel.UserListViewModel.Load();
+            _mainViewModel.HistoryTabViewModel.Load();
         }
 
         public void ShowCalendar(ShowCalendarPickerMessage msg)

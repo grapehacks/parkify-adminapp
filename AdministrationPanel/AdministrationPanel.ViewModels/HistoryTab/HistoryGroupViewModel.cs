@@ -12,7 +12,10 @@ namespace AdministrationPanel.ViewModels.HistoryTab
         public HistoryGroupViewModel(IEnumerable<Draw> draws)
         {
             _drawDate = draws.First().Date;
-            _items = draws.Select(d => new HistoryItemViewModel(d.card.name, d.winner.name)).ToList();
+            var tmp = draws.ToList();
+            _items = tmp
+                .Where(d=>d.card != null && d.card.name != null && d.winner != null && d.winner.name != null)
+                .Select(d => new HistoryItemViewModel(d.card.name, d.winner.name)).ToList();
         }
 
         public List<HistoryItemViewModel> Items
