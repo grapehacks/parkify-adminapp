@@ -26,7 +26,7 @@ namespace AdministrationPanel.Views
 			containerBuilder.RegisterType<CardViewModel>();
             containerBuilder.RegisterType<HomeTabViewModel>();
             containerBuilder.RegisterType<HistoryTabViewModel>();
-            containerBuilder.RegisterType<HistoryItemViewModel>();
+            containerBuilder.RegisterType<HistoryGroupViewModel>();
             containerBuilder.RegisterType<CalendarPickerWindow>();
             containerBuilder.RegisterType<CalendarWindowViewModel>();
             containerBuilder.RegisterType<MainViewModel>().SingleInstance();

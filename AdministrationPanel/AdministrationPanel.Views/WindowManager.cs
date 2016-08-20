@@ -70,6 +70,7 @@ namespace AdministrationPanel.Views
             _mainWindow.Show();
             _mainViewModel.UserListViewModel.Load();
 			_mainViewModel.CardListViewModel.Load();
+            _mainViewModel.HistoryTabViewModel.Load();
         }
 
         public void ShowCalendar(ShowCalendarPickerMessage msg)

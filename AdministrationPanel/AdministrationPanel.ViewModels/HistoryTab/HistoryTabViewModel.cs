@@ -1,33 +1,35 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Model;
+using Model.DataTypes;
 
 namespace AdministrationPanel.ViewModels.HistoryTab
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class HistoryTabViewModel : AdministrationPanelViewModelBase
     {
         private readonly IDataProvider _dataProvider;
         public HistoryTabViewModel(IDataProvider dataProvider)
         {
             _dataProvider = dataProvider;
-            Init();
         }
 
-        private async void Init()
+        public async void Load()
         {
             var draws = await _dataProvider.GetDraws();
-            var drawsList = draws.ToList();
-            _historyCollection = new ObservableCollection<HistoryItemViewModel>();
-            foreach (var draw in drawsList)
-            {
-                _historyCollection.Add(new HistoryItemViewModel(draw));
-            }
+            var drawList = draws == null ? new List<Draw>() : draws.ToList();
+
+            var groups1 = drawList.GroupBy(d => d.Date).ToList();
+            var groups2 =groups1.Select(g => new HistoryGroupViewModel(g)).ToList();
+
+            HistoryCollection = new ObservableCollection<HistoryGroupViewModel>(groups2);
         }
 
 
-        private ObservableCollection<HistoryItemViewModel> _historyCollection;
+        private ObservableCollection<HistoryGroupViewModel> _historyCollection;
 
-        public ObservableCollection<HistoryItemViewModel> HistoryCollection
+        public ObservableCollection<HistoryGroupViewModel> HistoryCollection
         {
             get { return _historyCollection; }
             set

@@ -6,24 +6,25 @@
              xmlns:local="clr-namespace:AdministrationPanel.Views.HistoryTab"
              xmlns:historyTab="clr-namespace:AdministrationPanel.ViewModels.HistoryTab;assembly=AdministrationPanel.ViewModels"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance d:Type=historyTab:HistoryTabViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.Resources>
-            <DataTemplate DataType="{x:Type historyTab:HistoryItemViewModel}" x:Key="HistoryItemTemplate">
-                <Expander Header="{Binding DrawDate}" FlowDirection="RightToLeft">
-                    <ListView ItemsSource="{Binding CardsCollection}">
+            <DataTemplate DataType="{x:Type historyTab:HistoryGroupViewModel}" x:Key="HistoryItemTemplate">
+                <Expander Header="{Binding DrawDate}">
+                    <ListView ItemsSource="{Binding Items}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Card">
                                     <GridViewColumn.CellTemplate>
-                                        <DataTemplate DataType="{x:Type historyTab:HistoryItemCardsViewModel}">
+                                        <DataTemplate DataType="{x:Type historyTab:HistoryItemViewModel}">
                                             <TextBlock Text="{Binding Card}"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                                 <GridViewColumn Header="Username" >
                                     <GridViewColumn.CellTemplate>
-                                        <DataTemplate DataType="{x:Type historyTab:HistoryItemCardsViewModel}"> 
+                                        <DataTemplate DataType="{x:Type historyTab:HistoryItemViewModel}"> 
                                             <TextBlock Text="{Binding Username}"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -37,21 +38,13 @@
 
         </Grid.Resources>
         
-        <ListView ItemsSource="{Binding HistoryCollection}" >
+        <ListView ItemsSource="{Binding HistoryCollection}" ItemTemplate="{StaticResource HistoryItemTemplate}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </ListView.ItemContainerStyle>
-
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Data losowania" 
-                                    CellTemplate="{StaticResource HistoryItemTemplate}">
-                    </GridViewColumn>
-                    
-                </GridView>
-            </ListView.View>
         </ListView>
+        
     </Grid>
 </UserControl>

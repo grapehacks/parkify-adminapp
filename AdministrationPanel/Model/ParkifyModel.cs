@@ -10,7 +10,7 @@ namespace Model
 		private const string PathPing = "ping";
 		private const string PathGetUsers = @"api/users";
 		private const string PathGetCards = @"api/cards";
-		private const string PathGetDraw = @"api/draw";
+		private const string PathGetDraw = @"api/history";
 		private const string PathAuth = @"/authenticate";
 		private const string PathDrawDate = @"/draw/draw-date";
 
