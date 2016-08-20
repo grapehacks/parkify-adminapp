@@ -52,5 +52,21 @@ namespace Model
 
             return tcs.Task;
         }
+
+        public Task<bool> SetDrawDate(Ping date)
+        {
+            var tcs = new TaskCompletionSource<bool>();
+
+            _model.SetDrawDate((s) => { 
+                tcs.SetResult(s == null); 
+            }, date);
+
+            return tcs.Task;
+        }
+
+	~DataProvider()
+        {
+            
+        }
     }
 }

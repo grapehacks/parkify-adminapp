@@ -80,7 +80,9 @@ namespace AdministrationPanel.ViewModels
             {
                 Email = string.Empty;
                 Password = string.Empty;
-                Error = result.errorMessage;
+                Error = string.IsNullOrWhiteSpace(result.errorMessage) 
+                    ? result.errorReason.ToString() 
+                    : result.errorMessage;
             }
         }
     }

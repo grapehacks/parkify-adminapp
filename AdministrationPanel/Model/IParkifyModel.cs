@@ -16,5 +16,6 @@ namespace Model
 		void GetDraws(Action<List<Draw>, string> action);
 		void GetDraws(Action<List<Draw>, string> action, int count);
 		void RemoveUser(Action<string> action, string userId);
+        void SetDrawDate(Action<string> action, Ping date);
 	}
 }
