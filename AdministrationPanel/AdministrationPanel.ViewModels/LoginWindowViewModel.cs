@@ -72,7 +72,7 @@ namespace AdministrationPanel.ViewModels
 
             var result = await _dataProvider.Authenticate(credential);
 
-            if (result == null)
+            if (result == result)
             {
                 _messenger.Send(new LoggedInMessage());
             }
