@@ -4,6 +4,8 @@ using AdministrationPanel.ViewModels.HistoryTab;
 using AdministrationPanel.ViewModels.HomeTab;
 using AdministrationPanel.ViewModels.UsersTab;
 using Autofac;
+using GalaSoft.MvvmLight.Messaging;
+using Model;
 
 namespace AdministrationPanel.Views
 {
@@ -21,17 +23,23 @@ namespace AdministrationPanel.Views
             containerBuilder.RegisterType<HomeTabViewModel>();
             containerBuilder.RegisterType<HistoryTabViewModel>();
             containerBuilder.RegisterType<HistoryItemViewModel>();
+            containerBuilder.RegisterType<MainViewModel>().SingleInstance();
+            containerBuilder.RegisterType<MainWindow>().SingleInstance();
+            containerBuilder.RegisterType<UserListViewModel>().SingleInstance();
+            containerBuilder.RegisterType<HomeTabViewModel>().SingleInstance();
+            containerBuilder.RegisterType<LoginWindow>().SingleInstance();
+            containerBuilder.RegisterType<LoginWindowViewModel>().SingleInstance();
+            containerBuilder.RegisterType<WindowManager>().SingleInstance();
+            containerBuilder.RegisterType<DataProvider>().As<IDataProvider>().SingleInstance();
+            containerBuilder.RegisterType<ParkifyModel>().As<IParkifyModel>().SingleInstance();
+            containerBuilder.RegisterType<Messenger>().As<IMessenger>().SingleInstance();
 
             Container = containerBuilder.Build();
         }
 
-        public Window GetMainWindow()
+        public WindowManager GetWindowManager()
         {
-            var viewModel = Container.Resolve<MainViewModel>();
-            var window = Container.Resolve<MainWindow>();
-
-            window.DataContext = viewModel;
-            return window;
+            return Container.Resolve<WindowManager>();
         }
     }
 }
