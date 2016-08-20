@@ -13,6 +13,8 @@
         Title="MainWindow" Height="750" Width="525">
     
     <Grid>
+        <Button Content="Wyloguj" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding ChangeDrawDateCommand}"/>
+        
         <TabControl>
             <TabItem Header="Home">
                 <ContentPresenter Content="{Binding HomeTabViewModel}">
@@ -48,6 +50,7 @@
                     </ContentPresenter.ContentTemplate>
                 </ContentPresenter>
             </TabItem>
+            
         </TabControl>
     </Grid>
     
