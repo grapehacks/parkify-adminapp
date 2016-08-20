@@ -3,9 +3,11 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Draw
     {
-        User winner { get; set; }
+        public User winner { get; set; }
 
-        Card card { get; set; }
+        public Card card { get; set; }
+
+        public string Date { get; set; }
 
         public override string ToString()
         {
