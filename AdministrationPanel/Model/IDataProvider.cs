@@ -10,5 +10,7 @@ namespace Model
         Task<IEnumerable<User>> GetUsers();
         Task<IEnumerable<Card>> GetCards();
         Task<IEnumerable<Draw>> GetDraws();
+
+        Task<string> RemoveUser(string userId);
     }
 }

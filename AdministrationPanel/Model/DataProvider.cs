@@ -53,9 +53,13 @@ namespace Model
             return tcs.Task;
         }
 
-        ~DataProvider()
+        public Task<string> RemoveUser(string userId)
         {
-            
+            var tcs = new TaskCompletionSource<string>();
+
+            _model.RemoveUser(s => {tcs.SetResult(s);}, userId);
+
+            return tcs.Task;
         }
     }
 }
