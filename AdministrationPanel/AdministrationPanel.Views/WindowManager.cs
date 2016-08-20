@@ -12,6 +12,7 @@ namespace AdministrationPanel.Views
         private readonly LoginWindow _loginWindow;
         private readonly CalendarPickerWindow _calendarPickerWindow;
         private readonly CalendarWindowViewModel _calendarViewModel;
+        private readonly UserAddEditWindow _userAddEditWindow;
         private readonly IMessenger _messenger;
 
         public WindowManager(
@@ -21,6 +22,7 @@ namespace AdministrationPanel.Views
             LoginWindow loginWindow, 
             CalendarWindowViewModel calendarViewModel,
             CalendarPickerWindow calendarWindow,
+            UserAddEditWindow userAddEditWindow,
             IMessenger messenger)
         {
             _mainViewModel = mainViewModel;
@@ -33,6 +35,7 @@ namespace AdministrationPanel.Views
             _calendarPickerWindow = calendarWindow;
             _calendarPickerWindow.DataContext = _calendarViewModel;
 
+            _userAddEditWindow = userAddEditWindow;
             _mainWindow.DataContext = mainViewModel;
             _loginWindow.DataContext = loginWindowViewModel;
 
@@ -41,6 +44,8 @@ namespace AdministrationPanel.Views
 
             _messenger.Register<ShowCalendarPickerMessage>(this, ShowCalendar);
             _messenger.Register<CloseCalendarPickerMessage>(this, HideCalendar);
+
+            _messenger.Register<ShowUserAddEditMessage>(this, ShowAddEditUser);
         }
 
         private void OnLoggedOutMessage(LoggedOutMessage obj)
@@ -75,6 +80,11 @@ namespace AdministrationPanel.Views
         public void HideCalendar(CloseCalendarPickerMessage msg)
         {
             _calendarPickerWindow.Hide();
+        }
+
+        public void ShowAddEditUser(ShowUserAddEditMessage msg)
+        {
+            _userAddEditWindow.Show();
         }
     }
 }
