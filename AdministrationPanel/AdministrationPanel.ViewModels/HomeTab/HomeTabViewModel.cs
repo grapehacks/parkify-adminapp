@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using GalaSoft.MvvmLight.CommandWpf;
 using Model;
 using Model.DataTypes;
@@ -18,17 +20,26 @@ namespace AdministrationPanel.ViewModels.HomeTab
 
         private async void Init()
         {
-            _usersCollection = new ObservableCollection<HomeTabUserViewModel>();
-            var usersList = await  _dataProvider.GetUsers();
-            foreach (var user in usersList)
+            var usersList = await _dataProvider.GetUsers();
+            if (usersList != null)
             {
-                _usersCollection.Add(new HomeTabUserViewModel(user));
+                _usersCollection = new ObservableCollection<HomeTabUserViewModel>();
+                foreach (var user in usersList)
+                {
+                    _usersCollection.Add(new HomeTabUserViewModel(user));
+                }
+
+                var view = CollectionViewSource.GetDefaultView(_usersCollection) as CollectionView;
+                view.SortDescriptions.Add(new SortDescription("UserParticipate", ListSortDirection.Ascending));
             }
 
             var cards = await _dataProvider.GetCards();
-            var list = cards.ToList();
-            _totalCards = list.Count.ToString();
-            _availibleCards = list.Count(x => x.active && !x.removed).ToString();
+            if (cards != null)
+            {
+                var list = cards.ToList();
+                _totalCards = list.Count.ToString();
+                _availibleCards = list.Count(x => x.active && !x.removed).ToString();
+            }
 
             UpcomingDraw = "28-10-2016";
         }
