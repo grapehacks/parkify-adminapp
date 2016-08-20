@@ -8,7 +8,7 @@ namespace Model
     {
         event EventHandler OnAuthenticationSucceed;
         event EventHandler OnAuthenticationFailed;
-        void Authenticate(Credentials cred, Action<string> action);
+        void Authenticate(Credentials cred, Action<Error> action);
         void GetUsers(Action<IEnumerable<User>, string> action);
         void GetUser(string userId, Action<User, string> action);
         void AddUser(User user, Action<User, string> action);

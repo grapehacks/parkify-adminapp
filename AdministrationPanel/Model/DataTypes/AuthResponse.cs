@@ -3,7 +3,8 @@
     // ReSharper disable once ClassNeverInstantiated.Global
 	class AuthResponse
 	{
-		public string Message { get; set; }
-		public string Token { get; set; }
+		public string message { get; set; }
+		public User user { get; set; }
+		public string token { get; set; }
 	}
 }

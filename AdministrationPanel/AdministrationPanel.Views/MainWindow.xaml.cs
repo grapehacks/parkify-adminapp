@@ -27,7 +27,7 @@ namespace AdministrationPanel.Views
 			{
 				if (error != null)
 				{
-					MessageBox.Show(error);
+					MessageBox.Show(error.errorMessage);
 				}
 				else
 				{
@@ -46,7 +46,7 @@ namespace AdministrationPanel.Views
 				}
 				else
 				{
-					MessageBox.Show(ping.Date.ToString());
+					MessageBox.Show(ping.date.ToString());
 				}
 			});
 
