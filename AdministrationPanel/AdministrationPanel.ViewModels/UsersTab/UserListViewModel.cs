@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Model;
@@ -9,11 +10,15 @@ namespace AdministrationPanel.ViewModels.UsersTab
     public class UserListViewModel : AdministrationPanelViewModelBase
     {
         private readonly IDataProvider _dataProvider;
+        private readonly UserViewModel.Factory _userViewModelFactory;
         private ObservableCollection<UserViewModel> _userList;
 
-        public UserListViewModel(IDataProvider dataProvider)
+        
+
+        public UserListViewModel(IDataProvider dataProvider, UserViewModel.Factory factory)
         {
             _dataProvider = dataProvider;
+            _userViewModelFactory = factory;
             _userList = new ObservableCollection<UserViewModel>();
         }
 
@@ -37,7 +42,7 @@ namespace AdministrationPanel.ViewModels.UsersTab
             var cardList = cards == null ? new List<Card>() : cards.ToList();
 
             var userViewModels = userList
-                .Select(user => new UserViewModel(
+                .Select(user => _userViewModelFactory(
                     user._id,
                     GetCardForUser(cardList, user._id),
                     user.name));

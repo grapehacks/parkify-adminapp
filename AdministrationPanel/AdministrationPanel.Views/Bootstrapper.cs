@@ -20,7 +20,8 @@ namespace AdministrationPanel.Views
 
             containerBuilder.RegisterType<MainViewModel>();
             containerBuilder.RegisterType<MainWindow>();
-			containerBuilder.RegisterType<UserListViewModel>();
+            containerBuilder.RegisterType<ViewModels.UsersTab.ActionsViewModel>();
+            containerBuilder.RegisterType<UserViewModel>();
 			containerBuilder.RegisterType<CardListViewModel>();
             containerBuilder.RegisterType<HomeTabViewModel>();
             containerBuilder.RegisterType<HistoryTabViewModel>();
