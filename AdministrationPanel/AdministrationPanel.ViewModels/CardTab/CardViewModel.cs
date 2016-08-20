@@ -1,4 +1,7 @@
-﻿namespace AdministrationPanel.ViewModels.CardsTab
+﻿using System;
+
+
+namespace AdministrationPanel.ViewModels.CardsTab
 {
     public class CardViewModel : AdministrationPanelViewModelBase
     {
@@ -9,14 +12,16 @@
 		private string _userName;
         private readonly ActionsViewModel _actionsViewModel;
 
-        public CardViewModel(string name, string type, bool removed, bool active, string userName)
+		public delegate CardViewModel Factory(string name, string type, bool removed, bool active, string userName);
+
+		public CardViewModel(string name, string type, bool removed, bool active, string userName, Func<string, ActionsViewModel> actionsFactory)
         {
             _name = name;
             _type = type;
 			_removed = removed;
 			_active = active;
             _userName = userName;
-            _actionsViewModel = new ActionsViewModel(name);
+			_actionsViewModel = actionsFactory(name);
         }
 
         public string Name

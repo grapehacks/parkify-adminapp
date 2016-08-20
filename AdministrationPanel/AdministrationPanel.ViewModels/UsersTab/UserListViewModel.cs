@@ -56,11 +56,10 @@ namespace AdministrationPanel.ViewModels.UsersTab
 
         private static string GetCardForUser(IEnumerable<Card> cards, string userId)
         {
-			//var card = cards.FirstOrDefault(c => c.user._id == userId);
-			//return card == null
-			//	? string.Empty
-			//	: card.name;
-			return "";
+			var card = cards.FirstOrDefault(c => c.user == userId);
+			return card == null
+				? string.Empty
+				: card.name;
         }
 
         #region AddUser command
