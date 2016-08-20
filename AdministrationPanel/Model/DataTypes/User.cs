@@ -2,6 +2,8 @@
 {
     public class User
     {
+        public User() { }
+
 		public User(string _name)
 		{
 			name = _name;
