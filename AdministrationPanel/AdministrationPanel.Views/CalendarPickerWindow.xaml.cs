@@ -8,22 +8,10 @@ namespace AdministrationPanel.Views
     /// </summary>
     public partial class CalendarPickerWindow : Window
     {
-        public DateTime Date
-        {
-            get;
-            private set;
-        }
-
         public CalendarPickerWindow()
         {
             InitializeComponent();
-            this.datePicker.DisplayDateStart = DateTime.Today;
-        }
-
-
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
+            DatePicker.DisplayDateStart = DateTime.Now;
         }
     }
 }

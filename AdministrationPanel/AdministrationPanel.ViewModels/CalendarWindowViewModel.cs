@@ -12,6 +12,7 @@ namespace AdministrationPanel.ViewModels
     {
         private readonly IDataProvider _dataProvider;
         private readonly RelayCommand _setDateCommand;
+        private readonly RelayCommand _cancelCommand;
         private readonly IMessenger _messenger;
 
         private DateTime _date;
@@ -20,6 +21,7 @@ namespace AdministrationPanel.ViewModels
         {
             _dataProvider = dataProvider;
             _setDateCommand = new RelayCommand(SetDate);
+            _cancelCommand = new RelayCommand(Cancel);
             _messenger = messenger;
         }
 
@@ -27,7 +29,12 @@ namespace AdministrationPanel.ViewModels
         {
             get { return _setDateCommand; }
         }
-        
+
+        public RelayCommand CancelCommand
+        {
+            get { return _cancelCommand; }
+        }
+
         public DateTime Date
         {
             get { return _date; }
@@ -41,11 +48,22 @@ namespace AdministrationPanel.ViewModels
         
         private async void SetDate()
         {
-            Ping datePing = new Ping();
+            var datePing = new Ping();
             datePing.date = Date;
             var result = await _dataProvider.SetDrawDate(datePing);
             if (result)
+            {
                 _messenger.Send(new CloseCalendarPickerMessage());
+            }
+            else
+            {
+                MessageBox.Show("nie udało sie ustawic daty");
+            }
+        }
+
+        private void Cancel()
+        {
+            _messenger.Send(new CloseCalendarPickerMessage());
         }
     }
 }
