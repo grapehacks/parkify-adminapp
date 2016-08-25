@@ -14,5 +14,8 @@ namespace Model
 
         Task<string> RemoveUser(string userId);
 		Task<Ping> GetDrawTime();
+
+        Task<string> AddUser(User user);
+        Task<string> EditUser(User user);
     }
 }

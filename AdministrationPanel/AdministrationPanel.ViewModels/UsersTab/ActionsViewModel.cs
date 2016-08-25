@@ -35,7 +35,7 @@ namespace AdministrationPanel.ViewModels.UsersTab
 
         private void EditUser()
         {
-            _messenger.Send(new ShowUserAddEditMessage { User = _user });
+            _messenger.Send(new ShowUserAddEditMessage { User = _user, DataProvider = _dataProvider });
         }
 
         private async void RemoveUser()

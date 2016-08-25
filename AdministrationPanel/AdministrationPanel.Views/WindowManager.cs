@@ -1,5 +1,6 @@
 ﻿using AdministrationPanel.ViewModels;
 using AdministrationPanel.ViewModels.Messages;
+using AdministrationPanel.ViewModels.UsersTab;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace AdministrationPanel.Views
@@ -46,6 +47,7 @@ namespace AdministrationPanel.Views
             _messenger.Register<CloseCalendarPickerMessage>(this, HideCalendar);
 
             _messenger.Register<ShowUserAddEditMessage>(this, ShowAddEditUser);
+            _messenger.Register<CloseUserAddEditMessage>(this, CloseAddEditUser);
         }
 
         private void OnLoggedOutMessage(LoggedOutMessage obj)
@@ -85,7 +87,13 @@ namespace AdministrationPanel.Views
 
         public void ShowAddEditUser(ShowUserAddEditMessage msg)
         {
+            _userAddEditWindow.DataContext = new UserViewModelAddEdit(msg.User, _messenger, msg.DataProvider);
             _userAddEditWindow.Show();
+        }
+
+        public void CloseAddEditUser(CloseUserAddEditMessage msg)
+        {
+            _userAddEditWindow.Hide();
         }
     }
 }

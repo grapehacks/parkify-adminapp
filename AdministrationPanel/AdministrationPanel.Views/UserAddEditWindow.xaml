@@ -6,8 +6,8 @@
         xmlns:usersTab="clr-namespace:AdministrationPanel.ViewModels.UsersTab;assembly=AdministrationPanel.ViewModels"
         mc:Ignorable="d"
                 d:DataContext="{d:DesignInstance d:Type=usersTab:UserViewModelAddEdit, IsDesignTimeCreatable=False}"
-        Title="UserAddEditWindow" Height="300" Width="300">
-    <StackPanel>
+        Title="UserAddEditWindow" Height="400" Width="300">
+    <StackPanel Margin="4">
         <TextBlock Text="ID:"/>
         <TextBlock IsEnabled="{Binding IsAddMode}" Text="{Binding Id}"/>
 
@@ -35,7 +35,7 @@
         <TextBlock Text="Type:"/>
         <CheckBox IsChecked="{Binding Type}"/>
 
-        <Button Content="{Binding SaveButtonLabel}" Command="{Binding SaveCommand}"/>
+        <Button Content="{Binding SaveButtonName}" Command="{Binding SaveCommand}"/>
         <Button Content="Anuluj" Command="{Binding CancelCommand}"/>
     </StackPanel>
 </Window>

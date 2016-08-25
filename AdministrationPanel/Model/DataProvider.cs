@@ -57,8 +57,9 @@ namespace Model
         {
             var tcs = new TaskCompletionSource<bool>();
 
-            _model.SetDrawDate((s) => { 
-                tcs.SetResult(s == null); 
+            _model.SetDrawDate((s) =>
+            {
+                tcs.SetResult(s == null);
             }, date);
 
             return tcs.Task;
@@ -73,13 +74,37 @@ namespace Model
             return tcs.Task;
         }
 
-		public Task<Ping> GetDrawTime()
-		{
-			var tcs = new TaskCompletionSource<Ping>();
+        public Task<Ping> GetDrawTime()
+        {
+            var tcs = new TaskCompletionSource<Ping>();
 
-			_model.PingForDate((date, s) => { tcs.SetResult(date); });
+            _model.PingForDate((date, s) => { tcs.SetResult(date); });
 
-			return tcs.Task;
-		}
+            return tcs.Task;
+        }
+
+        public Task<string> AddUser(User user)
+        {
+            var tcs = new TaskCompletionSource<string>();
+
+            _model.AddUser(user, (u, s) =>
+            {
+                tcs.SetResult(u._id);
+            });
+
+            return tcs.Task;
+        }
+
+        public Task<string> EditUser(User user)
+        {
+            var tcs = new TaskCompletionSource<string>();
+
+            _model.EditUser(user, (u, s) =>
+            {
+                tcs.SetResult(u._id);
+            });
+
+            return tcs.Task;
+        }
     }
 }

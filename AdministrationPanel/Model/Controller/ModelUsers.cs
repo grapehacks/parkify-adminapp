@@ -35,7 +35,7 @@ namespace Model
 
 		public void AddUser(User user, Action<User, string> action)
 		{
-			RestSharp.RestRequest request = new RestSharp.RestRequest(PathGetUsers, Method.POST);
+			var request = new RestRequest(PathGetUsers, Method.POST);
 			request.AddHeader("x-access-token", _myToken);
 			request.AddJsonBody(user);
 			_mRestClient.ExecuteAsync<User>(request, (response, callback) =>
@@ -47,7 +47,7 @@ namespace Model
 		
 		public void RemoveUser(Action<string> action, string userId)
 		{
-			RestSharp.RestRequest request = new RestSharp.RestRequest(PathGetUsers + @"/" + userId, RestSharp.Method.DELETE);
+			var request = new RestSharp.RestRequest(PathGetUsers + @"/" + userId, RestSharp.Method.DELETE);
 			request.AddHeader("x-access-token", _myToken);
 			request.RequestFormat = RestSharp.DataFormat.Json;
 			_mRestClient.ExecuteAsync(request, (response, callback) =>
@@ -56,5 +56,10 @@ namespace Model
 				action(GetErrorString(response));
 			});
 		}
-	}
+
+        public void EditUser(User user, Action<User, string> action)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

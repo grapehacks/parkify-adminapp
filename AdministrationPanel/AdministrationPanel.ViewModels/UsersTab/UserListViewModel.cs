@@ -75,7 +75,8 @@ namespace AdministrationPanel.ViewModels.UsersTab
 
         private void AddUser()
         {
-            _messenger.Send(new ShowUserAddEditMessage());
+            var mes = new ShowUserAddEditMessage {DataProvider = _dataProvider};
+            _messenger.Send(mes);
         }
         #endregion
     }

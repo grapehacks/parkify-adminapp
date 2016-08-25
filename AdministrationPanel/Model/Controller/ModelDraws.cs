@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model.DataTypes;
 using RestSharp;
 
@@ -36,9 +33,9 @@ namespace Model
 
 		public void SetDrawDate(Action<string> action, Ping date)
 		{
-			RestSharp.RestRequest request = new RestSharp.RestRequest(PathDrawDate, RestSharp.Method.PUT);
+			var request = new RestRequest(PathDrawDate, Method.PUT);
 			request.AddHeader("x-access-token", _myToken);
-			request.RequestFormat = RestSharp.DataFormat.Json;
+			request.RequestFormat = DataFormat.Json;
 			request.AddJsonBody(date);
 			_mRestClient.ExecuteAsync(request, (response, callback) =>
 			{

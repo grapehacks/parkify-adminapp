@@ -81,6 +81,7 @@
     <Compile Include="LoginWindowViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Messages\CloseCalendarPickerMessage.cs" />
+    <Compile Include="Messages\CloseUserAddEditMessage.cs" />
     <Compile Include="Messages\LoggedInMessage.cs" />
     <Compile Include="Messages\LoggedOutMessage.cs" />
     <Compile Include="Messages\ShowCalendarPickerMessage.cs" />
