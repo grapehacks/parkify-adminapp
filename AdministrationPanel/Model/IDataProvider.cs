@@ -17,5 +17,7 @@ namespace Model
 
         Task<string> AddUser(User user);
         Task<string> EditUser(User user);
+
+		Task<string> RemoveCard(string cardId);
     }
 }

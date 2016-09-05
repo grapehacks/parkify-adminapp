@@ -25,8 +25,8 @@
                   ItemsSource="{Binding CardList}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" Width="50" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Active" Width="60">
+                    <GridViewColumn Header="Name" Width="80" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Active" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

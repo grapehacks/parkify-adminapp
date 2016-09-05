@@ -104,7 +104,16 @@ namespace Model
                 tcs.SetResult(u._id);
             });
 
-            return tcs.Task;
-        }
+			return tcs.Task;
+		}
+
+		public Task<string> RemoveCard(string cardId)
+		{
+			var tcs = new TaskCompletionSource<string>();
+
+			_model.RemoveCard(s => { tcs.SetResult(s); }, cardId);
+
+			return tcs.Task;
+		}
     }
 }

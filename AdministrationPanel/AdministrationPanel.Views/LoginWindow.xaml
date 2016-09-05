@@ -10,21 +10,29 @@
              Width="200"
              Height="300"
              Background="White">
-    
+
     <StackPanel>
         <TextBlock Text="{Binding Error}" Foreground="Red" VerticalAlignment="Center" Margin="20"/>
 
         <Border Margin="20">
             <StackPanel>
                 <TextBlock Text="Email" />
-                <TextBox Text="{Binding Email}" />
+                <TextBox Text="{Binding Email}" >
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
+                    </TextBox.InputBindings>
+                </TextBox>
             </StackPanel>
         </Border>
 
         <Border Margin="20">
             <StackPanel>
                 <TextBlock Text="Password" />
-                <TextBox Text="{Binding Password}" />
+                <TextBox Text="{Binding Password}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding LoginCommand}" Key="Enter" />
+                    </TextBox.InputBindings>
+                </TextBox>
             </StackPanel>
         </Border>
         

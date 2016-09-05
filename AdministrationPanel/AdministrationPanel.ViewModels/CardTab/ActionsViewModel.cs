@@ -1,5 +1,6 @@
 using System.Windows;
 using GalaSoft.MvvmLight.CommandWpf;
+using Model;
 
 namespace AdministrationPanel.ViewModels.CardsTab
 {
@@ -8,10 +9,12 @@ namespace AdministrationPanel.ViewModels.CardsTab
         private readonly string _name;
         private readonly RelayCommand _editCommand;
         private readonly RelayCommand _removeCommand;
+		private readonly IDataProvider _dataProvider;
 
-        public ActionsViewModel(string name)
+		public ActionsViewModel(string name, IDataProvider dataProvider)
         {
             _name = name;
+			_dataProvider = dataProvider;
             _editCommand = new RelayCommand(EditCard);
             _removeCommand = new RelayCommand(RemoveCard);
         }
@@ -33,7 +36,7 @@ namespace AdministrationPanel.ViewModels.CardsTab
 
         private void RemoveCard()
         {
-            MessageBox.Show(string.Format("Call RemoveCard({0})", _name));
+			var result = _dataProvider.RemoveCard(_name);
         }
     }
 }

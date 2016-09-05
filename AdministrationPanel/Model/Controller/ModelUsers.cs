@@ -59,7 +59,15 @@ namespace Model
 
         public void EditUser(User user, Action<User, string> action)
         {
-            throw new NotImplementedException();
+            var userId = user._id;
+            var request = new RestRequest(PathGetUsers + "/" + userId, Method.PUT);
+            request.AddHeader("x-access-token", _myToken);
+            request.AddJsonBody(user);
+            _mRestClient.ExecuteAsync<User>(request, (response, callback) =>
+            {
+                Log(response.Content);
+                action(response.Data, GetErrorString(response));
+            });
         }
     }
 }
